@@ -17,7 +17,33 @@ public class FetchWeatherService {
     private String temporaryDateInString;
 
     public FetchWeatherService(String temporaryDateInString, String city){
-        doHttpGetWithOpenWeather();
+        doHttpToGetForecastForFiveDays(city);
+    }
+
+    private String getMessageFromJsonApiResponse(JSONObject jsonObjectWithMessage){
+        Integer codeOfMessage = jsonObjectWithMessage.getInt("cod");
+        return MessageCodes.getMessageBasedCode(codeOfMessage);
+    }
+
+    public JSONObject doHttpToGetForecastForFiveDays(String city){
+        city="Lubweqweqweqlin";
+        String urlToApi= "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+ApiData.getApiKey();
+        CloseableHttpClient client = HttpClients.createDefault();
+        HttpGet get = new HttpGet(urlToApi);
+        CloseableHttpResponse response = null;
+        JSONObject jsonObject = null;
+        try {
+            response = client.execute(get);
+            HttpEntity entity = response.getEntity();
+            String str = EntityUtils.toString(entity);
+            System.out.println(str);
+            jsonObject = new JSONObject(str);
+            getMessageFromJsonApiResponse(jsonObject);
+            response.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
     public static void doHttpGetWithOpenWeather(){
