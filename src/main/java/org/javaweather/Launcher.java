@@ -17,6 +17,7 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        WeatherManager weatherManager = new WeatherManager();
         scene = new Scene(loadFXML("view/MainWindow"), 640, 480);
         stage.setScene(scene);
         stage.show();
