@@ -24,7 +24,6 @@ public class FetchWeatherService {
     public FetchWeatherService(String city){
         this.getWeatherDataStatus = false;
         checkIfCityIsFoundAndAssignIfYes(city);
-        System.out.println(this.jsonWithWeatherData);
     }
 
     private boolean checkIfCityIsFoundAndAssignIfYes(String city){
@@ -44,7 +43,7 @@ public class FetchWeatherService {
     }
 
     private JSONObject getApiResponse(String city){
-        String urlToApi= "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+ApiData.getApiKey();
+        String urlToApi= "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&units=metric&appid="+ApiData.getApiKey();
         CloseableHttpClient client = HttpClients.createDefault();
         HttpGet get = new HttpGet(urlToApi);
         CloseableHttpResponse response = null;
