@@ -10,24 +10,27 @@ import org.json.JSONObject;
 
 
 import java.io.IOException;
-import java.util.List;
 
 public class FetchWeatherService {
 
     private String city;
-    private String temporaryDateInString;
     private JSONObject jsonWithWeatherData;
     private Boolean getWeatherDataStatus;
 
-    public FetchWeatherService(String temporaryDateInString, String city){
+    public JSONObject getJsonWithWeatherData() {
+        return jsonWithWeatherData;
+    }
+
+    public FetchWeatherService(String city){
         this.getWeatherDataStatus = false;
         checkIfCityIsFoundAndAssignIfYes(city);
+        System.out.println(this.jsonWithWeatherData);
     }
 
     private boolean checkIfCityIsFoundAndAssignIfYes(String city){
         JSONObject jsonWithResponseData = getApiResponse(city);
         String messageFromApi = getMessageFromJsonApiResponse(jsonWithResponseData);
-        if(messageFromApi.equals("City is found")){
+        if(messageFromApi.equals("City found")){
             this.jsonWithWeatherData=jsonWithResponseData;
             return this.getWeatherDataStatus=true;
         }else{

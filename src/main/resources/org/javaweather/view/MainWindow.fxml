@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="258.0" prefWidth="328.0" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.javaweather.controller.MainWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.javaweather.controller.MainWindowController">
    <children>
-      <Label text="MainWindow" />
-      <Button onAction="#TestButtonAction" text="Test button" />
+      <Button layoutX="40.0" layoutY="290.0" mnemonicParsing="false" onAction="#TestButtonAction" prefHeight="25.0" prefWidth="146.0" text="Test button" />
+      <Label fx:id="homeLocationWeather" layoutX="21.0" layoutY="14.0" prefHeight="30.0" prefWidth="236.0" text="Home location weather">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="homeCity" layoutX="21.0" layoutY="55.0" text="Home City">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="homeCountry" layoutX="21.0" layoutY="82.0" text="Home country">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="homeMainDayIcon" fitHeight="95.0" fitWidth="124.0" layoutX="21.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="homeMainDayTemperature" layoutX="145.0" layoutY="102.0" text="Temperatura" />
    </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-</VBox>
+   <effect>
+      <Blend />
+   </effect>
+</AnchorPane>
