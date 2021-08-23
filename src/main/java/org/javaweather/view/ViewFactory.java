@@ -9,7 +9,6 @@ import org.javaweather.controller.BaseController;
 import org.javaweather.controller.MainWindowController;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ViewFactory {
     private WeatherManager weatherManager;
@@ -38,6 +37,7 @@ public class ViewFactory {
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 }
