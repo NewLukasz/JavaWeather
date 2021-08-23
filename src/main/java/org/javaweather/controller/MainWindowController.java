@@ -38,6 +38,8 @@ public class MainWindowController extends BaseController implements Initializabl
     private Label mainDayCloudiness;
     @FXML
     private Label mainDayHumidity;
+    @FXML
+    private Label todaysDate;
 
     public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory,String fxmlName){
         super(weatherManager,viewFactory,fxmlName);
@@ -49,8 +51,11 @@ public class MainWindowController extends BaseController implements Initializabl
 
     @FXML
     void TestButtonAction() {
-
+        homeWeatherInformation.setCityAndReloadData(cityPicker.getText());
         fulfilDataForToday();
+        homeCity.setText(homeWeatherInformation.getCity());
+        System.out.println(homeWeatherInformation.getDateOfWeather(homeWeatherInformation.getFirstDayForecast()));
+        /*
         System.out.println(homeWeatherInformation.getWeatherIconCode(homeWeatherInformation.getFirstDayForecast()));
         System.out.println(homeWeatherInformation.getWeatherLongDescription(homeWeatherInformation.getFirstDayForecast()));
         System.out.println(homeWeatherInformation.getWeatherMainDescription(homeWeatherInformation.getFirstDayForecast()));
@@ -62,19 +67,21 @@ public class MainWindowController extends BaseController implements Initializabl
         System.out.println(homeWeatherInformation.getPressure(homeWeatherInformation.getFirstDayForecast()));
         System.out.println(homeWeatherInformation.getCloudiness(homeWeatherInformation.getFirstDayForecast()));
         System.out.println(homeWeatherInformation.getWindSpeed(homeWeatherInformation.getFirstDayForecast()));
-
+*/
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         homeWeatherInformation.setWeatherDataBasedOnFetchService();
         homeCity.setText(homeWeatherInformation.getCity());
-        homeCountry.setText("Włochy");
         fulfilDataForToday();
+
     }
 
     private void fulfilDataForToday(){
+        todaysDate.setText(homeWeatherInformation.getDateOfWeather(homeWeatherInformation.getFirstDayForecast()));
         homeMainDayTemperature.setText(homeWeatherInformation.getTemperature(homeWeatherInformation.getFirstDayForecast()));
         homeMainTemperatureFeelsLike.setText(homeWeatherInformation.getTemperature(homeWeatherInformation.getFirstDayForecast()));
         mainDayCloudiness.setText(homeWeatherInformation.getCloudiness(homeWeatherInformation.getFirstDayForecast()));

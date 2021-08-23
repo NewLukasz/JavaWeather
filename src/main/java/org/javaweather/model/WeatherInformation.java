@@ -8,7 +8,7 @@ import org.json.JSONObject;
 public class WeatherInformation {
     private FetchWeatherService fetchWeatherService = null;
     private JSONObject jsonObjectWithWeather = null;
-    private String city;
+    private String city = "Berlin";
     private JSONObject firstDayForecast;
     private JSONObject secondDayForecast;
     private JSONObject thirdDayForecast;
@@ -21,8 +21,9 @@ public class WeatherInformation {
     final int INDEX_OF_FOURTH_DAY_DATA_9AM = 24;
     final int INDEX_OF_FIFTH_DAY_DATA_9AM = 32;
 
-    public WeatherInformation(String city){
-        this.city = city;
+    final int INDEX_OF_LAST_NECESSARY_DATE_SIGN=10;
+
+    public WeatherInformation(){
         this.fetchWeatherService = new FetchWeatherService(this.city);
         this.jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
     }
@@ -35,9 +36,11 @@ public class WeatherInformation {
         return city;
     }
 
-    public void setCity(String city){
+    public void setCityAndReloadData(String city){
         this.city=city;
         this.fetchWeatherService = new FetchWeatherService(this.city);
+        this.jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
+        setWeatherDataBasedOnFetchService();
     }
 
     public void setWeatherDataBasedOnFetchService(){
@@ -47,6 +50,10 @@ public class WeatherInformation {
         this.thirdDayForecast = inputArray.getJSONObject(INDEX_OF_THIRD_DAY_DATA_9AM);
         this.fourthDayForecast =inputArray.getJSONObject(INDEX_OF_FOURTH_DAY_DATA_9AM);
         this.fifthDayForecast = inputArray.getJSONObject(INDEX_OF_FIFTH_DAY_DATA_9AM);
+    }
+
+    public String getDateOfWeather(JSONObject jsonObjectWithSingleDayData){
+        return jsonObjectWithSingleDayData.getString("dt_txt").substring(0,INDEX_OF_LAST_NECESSARY_DATE_SIGN);
     }
 
     public String getWeatherIconCode(JSONObject jsonObjectWithSingleDayData){

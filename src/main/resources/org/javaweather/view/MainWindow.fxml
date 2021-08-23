@@ -52,6 +52,8 @@
       <Label fx:id="mainDayCloudiness" layoutX="402.0" layoutY="166.0" text="100%" />
       <Label layoutX="438.0" layoutY="166.0" text="Humidity:" />
       <Label fx:id="mainDayHumidity" layoutX="489.0" layoutY="166.0" text="100%" />
+      <Label layoutX="145.0" layoutY="74.0" text="Today is " />
+      <Label fx:id="todaysDate" layoutX="190.0" layoutY="74.0" text="23.08.2021" />
    </children>
    <effect>
       <Blend />
