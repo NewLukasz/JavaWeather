@@ -8,6 +8,7 @@ import org.json.JSONObject;
 public class WeatherInformation {
     private FetchWeatherService fetchWeatherService = null;
     private JSONObject jsonObjectWithWeather = null;
+    private String city;
     private JSONObject firstDayForecast;
     private JSONObject secondDayForecast;
     private JSONObject thirdDayForecast;
@@ -25,6 +26,7 @@ public class WeatherInformation {
     final int INDEX_OF_FIFTH_DAY_DATA_9AM = 32;
 
     public WeatherInformation(String city){
+        this.city = city;
         this.fetchWeatherService = new FetchWeatherService(city);
         this.jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
     }

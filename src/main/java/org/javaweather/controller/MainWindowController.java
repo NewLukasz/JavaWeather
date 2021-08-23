@@ -7,6 +7,7 @@ import org.javaweather.model.WeatherInformation;
 
 public class MainWindowController {
 
+
     private WeatherInformation weatherInformation = new WeatherInformation("Wenecja");
 
     @FXML
