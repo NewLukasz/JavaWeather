@@ -4,15 +4,9 @@ import org.javaweather.model.WeatherInformation;
 
 public class WeatherManager {
 
-    private String homeCity="Wenecja";
-
-    private WeatherInformation homeWeather = new WeatherInformation(this.homeCity);
+    private WeatherInformation homeWeather = new WeatherInformation();
 
     public WeatherInformation getHomeWeather() {
         return homeWeather;
-    }
-
-    public void setHomeCity(String homeCity){
-        this.homeCity = homeCity;
     }
 }
