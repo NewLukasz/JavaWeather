@@ -8,9 +8,8 @@ import org.javaweather.model.WeatherInformation;
 import org.javaweather.view.ViewFactory;
 
 public class MainWindowController extends BaseController{
-
-
-    private WeatherInformation weatherInformation = new WeatherInformation("Wenecja");
+    private WeatherManager weatherManager;
+    private WeatherInformation homeWeatherInformation;
 
     @FXML
     private Label homeLocationWeather;
@@ -29,6 +28,7 @@ public class MainWindowController extends BaseController{
 
     public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory,String fxmlName){
         super(weatherManager,viewFactory,fxmlName);
+        this.homeWeatherInformation = weatherManager.getHomeWeather();
     }
 
     @FXML
@@ -37,17 +37,17 @@ public class MainWindowController extends BaseController{
         homeCountry.setText("Przyklad - Polska");
         homeMainDayTemperature.setText("Przyklad - 20st");
         System.out.println("Test button action");
-        weatherInformation.setWeatherDataBasedOnFetchService();
-        System.out.println(weatherInformation.getWeatherIconCode(weatherInformation.getFirstDayForecast()));
-        System.out.println(weatherInformation.getWeatherLongDescription(weatherInformation.getFirstDayForecast()));
-        System.out.println(weatherInformation.getWeatherMainDescription(weatherInformation.getFirstDayForecast()));
-        System.out.println(weatherInformation.getTemperature(weatherInformation.getFirstDayForecast()));
-        System.out.println(weatherInformation.getMinTemperature(weatherInformation.getFirstDayForecast()));
-        System.out.println(weatherInformation.getMaxTemperature(weatherInformation.getFirstDayForecast()));
-        System.out.println(weatherInformation.getFeelsLikeTemperature(weatherInformation.getFirstDayForecast()));
-        System.out.println(weatherInformation.getHumidity(weatherInformation.getFirstDayForecast()));
-        System.out.println(weatherInformation.getPressure(weatherInformation.getFirstDayForecast()));
-        System.out.println(weatherInformation.getCloudiness(weatherInformation.getFirstDayForecast()));
-        System.out.println(weatherInformation.getWindSpeed(weatherInformation.getFirstDayForecast()));
+        homeWeatherInformation.setWeatherDataBasedOnFetchService();
+        System.out.println(homeWeatherInformation.getWeatherIconCode(homeWeatherInformation.getFirstDayForecast()));
+        System.out.println(homeWeatherInformation.getWeatherLongDescription(homeWeatherInformation.getFirstDayForecast()));
+        System.out.println(homeWeatherInformation.getWeatherMainDescription(homeWeatherInformation.getFirstDayForecast()));
+        System.out.println(homeWeatherInformation.getTemperature(homeWeatherInformation.getFirstDayForecast()));
+        System.out.println(homeWeatherInformation.getMinTemperature(homeWeatherInformation.getFirstDayForecast()));
+        System.out.println(homeWeatherInformation.getMaxTemperature(homeWeatherInformation.getFirstDayForecast()));
+        System.out.println(homeWeatherInformation.getFeelsLikeTemperature(homeWeatherInformation.getFirstDayForecast()));
+        System.out.println(homeWeatherInformation.getHumidity(homeWeatherInformation.getFirstDayForecast()));
+        System.out.println(homeWeatherInformation.getPressure(homeWeatherInformation.getFirstDayForecast()));
+        System.out.println(homeWeatherInformation.getCloudiness(homeWeatherInformation.getFirstDayForecast()));
+        System.out.println(homeWeatherInformation.getWindSpeed(homeWeatherInformation.getFirstDayForecast()));
     }
 }

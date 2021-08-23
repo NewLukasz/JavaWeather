@@ -31,7 +31,6 @@ public class ViewFactory {
         Parent parent;
         try{
             parent = fxmlLoader.load();
-
         }catch (IOException e){
             e.printStackTrace();
             return;
