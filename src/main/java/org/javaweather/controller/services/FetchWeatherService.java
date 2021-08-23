@@ -29,7 +29,7 @@ public class FetchWeatherService {
     private boolean checkIfCityIsFoundAndAssignIfYes(String city){
         JSONObject jsonWithResponseData = getApiResponse(city);
         String messageFromApi = getMessageFromJsonApiResponse(jsonWithResponseData);
-        if(messageFromApi.equals("City found")){
+        if(messageFromApi.equals(MessageCodes.getCityFound())){
             this.jsonWithWeatherData=jsonWithResponseData;
             return this.getWeatherDataStatus=true;
         }else{
