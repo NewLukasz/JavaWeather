@@ -11,8 +11,4 @@ public class WeatherManager {
     public WeatherInformation getHomeWeather() {
         return homeWeather;
     }
-
-    public void setHomeCity(String homeCity){
-        this.homeCity = homeCity;
-    }
 }

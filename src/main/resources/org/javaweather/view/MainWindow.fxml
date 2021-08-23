@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +11,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="40.0" layoutY="290.0" mnemonicParsing="false" onAction="#TestButtonAction" prefHeight="25.0" prefWidth="146.0" text="Test button" />
-      <Label fx:id="homeLocationWeather" layoutX="21.0" layoutY="14.0" prefHeight="30.0" prefWidth="236.0" text="Home location weather">
+      <Label layoutX="21.0" layoutY="14.0" prefHeight="30.0" prefWidth="236.0" text="Home location weather">
          <font>
             <Font size="20.0" />
          </font>
@@ -26,7 +27,31 @@
          </font>
       </Label>
       <ImageView fx:id="homeMainDayIcon" fitHeight="95.0" fitWidth="124.0" layoutX="21.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="homeMainDayTemperature" layoutX="145.0" layoutY="102.0" text="Temperatura" />
+      <Label fx:id="homeMainDayTemperature" layoutX="146.0" layoutY="92.0" text="20 st.C">
+         <font>
+            <Font size="36.0" />
+         </font></Label>
+      <TextField fx:id="cityPicker" layoutX="36.0" layoutY="356.0" />
+      <Label layoutX="149.0" layoutY="137.0" text="Feels like:" />
+      <Label fx:id="shortWeatherDescription" layoutX="277.0" layoutY="105.0" text="ShortWeatherDesciption">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="homeMainTemperatureFeelsLike" layoutX="206.0" layoutY="137.0" text="15st." />
+      <Label fx:id="longWeatherDescription" layoutX="277.0" layoutY="136.0" text="LongWeatherDesciption">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="149.0" layoutY="166.0" text="Pressure:" />
+      <Label fx:id="mainDayPressure" layoutX="197.0" layoutY="166.0" text="1032mbar" />
+      <Label layoutX="266.0" layoutY="166.0" text="Wind: " />
+      <Label layoutX="347.0" layoutY="166.0" text="Cloudines:" />
+      <Label fx:id="mainDayWind" layoutX="300.0" layoutY="166.0" text="10m/s" />
+      <Label fx:id="mainDayCloudiness" layoutX="402.0" layoutY="166.0" text="100%" />
+      <Label layoutX="438.0" layoutY="166.0" text="Humidity:" />
+      <Label fx:id="mainDayHumidity" layoutX="489.0" layoutY="166.0" text="100%" />
    </children>
    <effect>
       <Blend />

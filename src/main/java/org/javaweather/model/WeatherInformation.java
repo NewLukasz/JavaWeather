@@ -15,10 +15,6 @@ public class WeatherInformation {
     private JSONObject fourthDayForecast;
     private JSONObject fifthDayForecast;
 
-    public JSONObject getFirstDayForecast() {
-        return firstDayForecast;
-    }
-
     final int INDEX_OF_FIRST_DAY_DATA_9AM = 0;
     final int INDEX_OF_SECOND_DAY_DATA_9AM = 8;
     final int INDEX_OF_THIRD_DAY_DATA_9AM = 16;
@@ -27,8 +23,21 @@ public class WeatherInformation {
 
     public WeatherInformation(String city){
         this.city = city;
-        this.fetchWeatherService = new FetchWeatherService(city);
+        this.fetchWeatherService = new FetchWeatherService(this.city);
         this.jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
+    }
+
+    public JSONObject getFirstDayForecast() {
+        return firstDayForecast;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city){
+        this.city=city;
+        this.fetchWeatherService = new FetchWeatherService(this.city);
     }
 
     public void setWeatherDataBasedOnFetchService(){
@@ -52,8 +61,8 @@ public class WeatherInformation {
         return convertOneElementJsonArrayToJsonObject(jsonObjectWithSingleDayData.getJSONArray("weather")).getString("main");
     }
 
-    public Double getTemperature(JSONObject jsonObjectWithSingleDayData){
-        return jsonObjectWithSingleDayData.getJSONObject("main").getDouble("temp");
+    public String getTemperature(JSONObject jsonObjectWithSingleDayData){
+        return convertTemperatureToStringAndAddCelsiusUnit(jsonObjectWithSingleDayData.getJSONObject("main").getDouble("temp"));
     }
 
     public Double getMinTemperature(JSONObject jsonObjectWithSingleDayData){
@@ -68,23 +77,27 @@ public class WeatherInformation {
         return jsonObjectWithSingleDayData.getJSONObject("main").getDouble("feels_like");
     }
 
-    public Integer getHumidity(JSONObject jsonObjectWithSingleDayData){
-        return jsonObjectWithSingleDayData.getJSONObject("main").getInt("humidity");
+    public String getHumidity(JSONObject jsonObjectWithSingleDayData){
+        return String.valueOf(jsonObjectWithSingleDayData.getJSONObject("main").getInt("humidity")) + "%";
     }
 
-    public Integer getPressure(JSONObject jsonObjectWithSingleDayData){
-        return jsonObjectWithSingleDayData.getJSONObject("main").getInt("pressure");
+    public String getPressure(JSONObject jsonObjectWithSingleDayData){
+        return String.valueOf(jsonObjectWithSingleDayData.getJSONObject("main").getInt("pressure"))+"hPA";
     }
 
-    public Integer getCloudiness(JSONObject jsonObjectWithSingleDayData){
-        return jsonObjectWithSingleDayData.getJSONObject("clouds").getInt("all");
+    public String getCloudiness(JSONObject jsonObjectWithSingleDayData){
+        return String.valueOf(jsonObjectWithSingleDayData.getJSONObject("clouds").getInt("all"))+ "%";
     }
 
-    public Double getWindSpeed(JSONObject jsonObjectWithSingleDayData){
-        return jsonObjectWithSingleDayData.getJSONObject("wind").getDouble("speed");
+    public String getWindSpeed(JSONObject jsonObjectWithSingleDayData){
+        return String.valueOf((int)jsonObjectWithSingleDayData.getJSONObject("wind").getDouble("speed"))+"m/s";
     }
 
     private JSONObject convertOneElementJsonArrayToJsonObject(JSONArray oneElementJsonArray){
         return oneElementJsonArray.getJSONObject(0);
+    }
+
+    public String convertTemperatureToStringAndAddCelsiusUnit(double temperature){
+        return String.valueOf((int)temperature) + "\u00B0C";
     }
 }

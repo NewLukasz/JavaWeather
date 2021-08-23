@@ -21,6 +21,10 @@ public class FetchWeatherService {
         return jsonWithWeatherData;
     }
 
+    public void setCity(String city){
+        this.city=city;
+    }
+
     public FetchWeatherService(String city){
         this.getWeatherDataStatus = false;
         checkIfCityIsFoundAndAssignIfYes(city);
