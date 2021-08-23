@@ -57,24 +57,6 @@ public class MainWindowController extends BaseController implements Initializabl
         homeWeatherInformation.setCityAndReloadData(cityPicker.getText());
         fulfilDataForToday();
         homeCity.setText(homeWeatherInformation.getCity());
-        System.out.println(homeWeatherInformation.getDateOfWeather(homeWeatherInformation.getFirstDayForecast()));
-        System.out.println(homeWeatherInformation.getWeatherIconCode(homeWeatherInformation.getFirstDayForecast()));
-        Image image = iconResolver.getIconForWeather(homeWeatherInformation.getWeatherIconCode(homeWeatherInformation.getFirstDayForecast()));
-        homeMainDayIcon.setImage(image);
-        /*
-        System.out.println(homeWeatherInformation.getWeatherIconCode(homeWeatherInformation.getFirstDayForecast()));
-        System.out.println(homeWeatherInformation.getWeatherLongDescription(homeWeatherInformation.getFirstDayForecast()));
-        System.out.println(homeWeatherInformation.getWeatherMainDescription(homeWeatherInformation.getFirstDayForecast()));
-        System.out.println(homeWeatherInformation.getTemperature(homeWeatherInformation.getFirstDayForecast()));
-        System.out.println(homeWeatherInformation.getMinTemperature(homeWeatherInformation.getFirstDayForecast()));
-        System.out.println(homeWeatherInformation.getMaxTemperature(homeWeatherInformation.getFirstDayForecast()));
-        System.out.println(homeWeatherInformation.getFeelsLikeTemperature(homeWeatherInformation.getFirstDayForecast()));
-        System.out.println(homeWeatherInformation.getHumidity(homeWeatherInformation.getFirstDayForecast()));
-        System.out.println(homeWeatherInformation.getPressure(homeWeatherInformation.getFirstDayForecast()));
-        System.out.println(homeWeatherInformation.getCloudiness(homeWeatherInformation.getFirstDayForecast()));
-        System.out.println(homeWeatherInformation.getWindSpeed(homeWeatherInformation.getFirstDayForecast()));
-*/
-
     }
 
     @Override
@@ -94,5 +76,7 @@ public class MainWindowController extends BaseController implements Initializabl
         mainDayWind.setText(homeWeatherInformation.getWindSpeed(homeWeatherInformation.getFirstDayForecast()));
         shortWeatherDescription.setText(homeWeatherInformation.getWeatherMainDescription(homeWeatherInformation.getFirstDayForecast()));
         longWeatherDescription.setText(homeWeatherInformation.getWeatherLongDescription(homeWeatherInformation.getFirstDayForecast()));
+        Image image = iconResolver.getIconForWeather(homeWeatherInformation.getWeatherIconCode(homeWeatherInformation.getFirstDayForecast()));
+        homeMainDayIcon.setImage(image);
     }
 }
