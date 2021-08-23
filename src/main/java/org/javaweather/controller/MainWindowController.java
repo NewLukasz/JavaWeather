@@ -3,9 +3,11 @@ package org.javaweather.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import org.javaweather.WeatherManager;
 import org.javaweather.model.WeatherInformation;
+import org.javaweather.view.ViewFactory;
 
-public class MainWindowController {
+public class MainWindowController extends BaseController{
 
 
     private WeatherInformation weatherInformation = new WeatherInformation("Wenecja");
@@ -24,6 +26,10 @@ public class MainWindowController {
 
     @FXML
     private Label homeMainDayTemperature;
+
+    public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory,String fxmlName){
+        super(weatherManager,viewFactory,fxmlName);
+    }
 
     @FXML
     void TestButtonAction() {

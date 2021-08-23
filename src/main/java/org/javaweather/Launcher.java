@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.javaweather.view.ViewFactory;
 
 import java.io.IOException;
 
@@ -17,10 +18,13 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        ViewFactory viewFactory = new ViewFactory(new WeatherManager());
+        viewFactory.showMainWindow();
+        /*
         WeatherManager weatherManager = new WeatherManager();
         scene = new Scene(loadFXML("view/MainWindow"), 640, 480);
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
     }
 
     public static void setRoot(String fxml) throws IOException {
