@@ -4,9 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.javaweather.WeatherManager;
 import org.javaweather.model.WeatherInformation;
+import org.javaweather.view.IconResolver;
 import org.javaweather.view.ViewFactory;
 
 import java.net.URL;
@@ -15,6 +17,7 @@ import java.util.ResourceBundle;
 public class MainWindowController extends BaseController implements Initializable {
     private WeatherManager weatherManager;
     private WeatherInformation homeWeatherInformation;
+    private IconResolver iconResolver = new IconResolver();
 
     @FXML
     private Label homeCity;
@@ -55,6 +58,9 @@ public class MainWindowController extends BaseController implements Initializabl
         fulfilDataForToday();
         homeCity.setText(homeWeatherInformation.getCity());
         System.out.println(homeWeatherInformation.getDateOfWeather(homeWeatherInformation.getFirstDayForecast()));
+        System.out.println(homeWeatherInformation.getWeatherIconCode(homeWeatherInformation.getFirstDayForecast()));
+        Image image = iconResolver.getIconForWeather(homeWeatherInformation.getWeatherIconCode(homeWeatherInformation.getFirstDayForecast()));
+        homeMainDayIcon.setImage(image);
         /*
         System.out.println(homeWeatherInformation.getWeatherIconCode(homeWeatherInformation.getFirstDayForecast()));
         System.out.println(homeWeatherInformation.getWeatherLongDescription(homeWeatherInformation.getFirstDayForecast()));
@@ -73,11 +79,9 @@ public class MainWindowController extends BaseController implements Initializabl
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         homeWeatherInformation.setWeatherDataBasedOnFetchService();
         homeCity.setText(homeWeatherInformation.getCity());
         fulfilDataForToday();
-
     }
 
     private void fulfilDataForToday(){
