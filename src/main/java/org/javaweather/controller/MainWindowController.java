@@ -30,5 +30,17 @@ public class MainWindowController {
         homeCountry.setText("Przyklad - Polska");
         homeMainDayTemperature.setText("Przyklad - 20st");
         System.out.println("Test button action");
+        weatherInformation.setWeatherDataBasedOnFetchService();
+        System.out.println(weatherInformation.getWeatherIconCode(weatherInformation.getFirstDayForecast()));
+        System.out.println(weatherInformation.getWeatherLongDescription(weatherInformation.getFirstDayForecast()));
+        System.out.println(weatherInformation.getWeatherMainDescription(weatherInformation.getFirstDayForecast()));
+        System.out.println(weatherInformation.getTemperature(weatherInformation.getFirstDayForecast()));
+        System.out.println(weatherInformation.getMinTemperature(weatherInformation.getFirstDayForecast()));
+        System.out.println(weatherInformation.getMaxTemperature(weatherInformation.getFirstDayForecast()));
+        System.out.println(weatherInformation.getFeelsLikeTemperature(weatherInformation.getFirstDayForecast()));
+        System.out.println(weatherInformation.getHumidity(weatherInformation.getFirstDayForecast()));
+        System.out.println(weatherInformation.getPressure(weatherInformation.getFirstDayForecast()));
+        System.out.println(weatherInformation.getCloudiness(weatherInformation.getFirstDayForecast()));
+        System.out.println(weatherInformation.getWindSpeed(weatherInformation.getFirstDayForecast()));
     }
 }
