@@ -10,28 +10,19 @@ public class WeatherInformation {
     private FetchWeatherService fetchWeatherService = null;
     private JSONObject jsonObjectWithWeather = null;
     private String city = "Warszawa";
-    private JSONObject firstDayForecast;
-    private JSONObject secondDayForecast;
-    private JSONObject thirdDayForecast;
-    private JSONObject fourthDayForecast;
-    private JSONObject fifthDayForecast;
     private ArrayList<JSONObject> listOfDaysData;
 
-    final int INDEX_OF_FIRST_DAY_DATA_9AM = 0;
-    final int INDEX_OF_SECOND_DAY_DATA_9AM = 8;
-    final int INDEX_OF_THIRD_DAY_DATA_9AM = 16;
-    final int INDEX_OF_FOURTH_DAY_DATA_9AM = 24;
-    final int INDEX_OF_FIFTH_DAY_DATA_9AM = 32;
+    final int INDEX_OF_FIRST_DAY_DATA = 0;
+    final int INDEX_OF_SECOND_DAY_DATA = 8;
+    final int INDEX_OF_THIRD_DAY_DATA = 16;
+    final int INDEX_OF_FOURTH_DAY_DATA = 24;
+    final int INDEX_OF_FIFTH_DAY_DATA = 32;
 
     final int INDEX_OF_LAST_NECESSARY_DATE_SIGN=10;
 
     public WeatherInformation(){
         this.fetchWeatherService = new FetchWeatherService(this.city);
         this.jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
-    }
-
-    public JSONObject getFirstDayForecast() {
-        return firstDayForecast;
     }
 
     public JSONObject getOneDayFromForecast(Integer indexOfTheDay){
@@ -51,17 +42,17 @@ public class WeatherInformation {
 
     public void setWeatherDataBasedOnFetchService(){
         JSONArray inputArray = (JSONArray) this.jsonObjectWithWeather.opt("list");
-        this.firstDayForecast = inputArray.getJSONObject(INDEX_OF_FIRST_DAY_DATA_9AM);
-        this.secondDayForecast = inputArray.getJSONObject(INDEX_OF_SECOND_DAY_DATA_9AM);
-        this.thirdDayForecast = inputArray.getJSONObject(INDEX_OF_THIRD_DAY_DATA_9AM);
-        this.fourthDayForecast =inputArray.getJSONObject(INDEX_OF_FOURTH_DAY_DATA_9AM);
-        this.fifthDayForecast = inputArray.getJSONObject(INDEX_OF_FIFTH_DAY_DATA_9AM);
+        JSONObject firstDayForecast = inputArray.getJSONObject(INDEX_OF_FIRST_DAY_DATA);
+        JSONObject secondDayForecast = inputArray.getJSONObject(INDEX_OF_SECOND_DAY_DATA);
+        JSONObject thirdDayForecast = inputArray.getJSONObject(INDEX_OF_THIRD_DAY_DATA);
+        JSONObject fourthDayForecast =inputArray.getJSONObject(INDEX_OF_FOURTH_DAY_DATA);
+        JSONObject fifthDayForecast = inputArray.getJSONObject(INDEX_OF_FIFTH_DAY_DATA);
         listOfDaysData = new ArrayList<JSONObject>();
-        this.listOfDaysData.add(this.firstDayForecast);
-        this.listOfDaysData.add(this.secondDayForecast);
-        this.listOfDaysData.add(this.thirdDayForecast);
-        this.listOfDaysData.add(this.fourthDayForecast);
-        this.listOfDaysData.add(this.fifthDayForecast);
+        this.listOfDaysData.add(firstDayForecast);
+        this.listOfDaysData.add(secondDayForecast);
+        this.listOfDaysData.add(thirdDayForecast);
+        this.listOfDaysData.add(fourthDayForecast);
+        this.listOfDaysData.add(fifthDayForecast);
     }
 
     public String getDateOfWeather(JSONObject jsonObjectWithSingleDayData){
@@ -92,8 +83,8 @@ public class WeatherInformation {
         return convertTemperatureToStringAndAddCelsiusUnit(jsonObjectWithSingleDayData.getJSONObject("main").getDouble("temp_max"));
     }
 
-    public Double getFeelsLikeTemperature(JSONObject jsonObjectWithSingleDayData){
-        return jsonObjectWithSingleDayData.getJSONObject("main").getDouble("feels_like");
+    public String getFeelsLikeTemperature(JSONObject jsonObjectWithSingleDayData){
+        return convertTemperatureToStringAndAddCelsiusUnit(jsonObjectWithSingleDayData.getJSONObject("main").getDouble("feels_like"));
     }
 
     public String getHumidity(JSONObject jsonObjectWithSingleDayData){

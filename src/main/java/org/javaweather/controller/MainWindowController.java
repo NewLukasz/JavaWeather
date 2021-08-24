@@ -16,7 +16,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainWindowController extends BaseController implements Initializable {
-    private WeatherManager weatherManager;
     private WeatherInformation homeWeatherInformation;
     private IconResolver iconResolver = new IconResolver();
 
@@ -124,17 +123,30 @@ public class MainWindowController extends BaseController implements Initializabl
     }
 
     private void fulfilHomeWeatherDataForToday(){
-        todaysDate.setText(homeWeatherInformation.getDateOfWeather(homeWeatherInformation.getOneDayFromForecast(0)));
-        homeMainDayTemperature.setText(homeWeatherInformation.getTemperature(homeWeatherInformation.getOneDayFromForecast(0)));
-        homeMainTemperatureFeelsLike.setText(homeWeatherInformation.getTemperature(homeWeatherInformation.getOneDayFromForecast(0)));
-        mainDayCloudiness.setText(homeWeatherInformation.getCloudiness(homeWeatherInformation.getOneDayFromForecast(0)));
-        mainDayHumidity.setText(homeWeatherInformation.getHumidity(homeWeatherInformation.getOneDayFromForecast(0)));
-        mainDayPressure.setText(homeWeatherInformation.getPressure(homeWeatherInformation.getOneDayFromForecast(0)));
-        mainDayWind.setText(homeWeatherInformation.getWindSpeed(homeWeatherInformation.getOneDayFromForecast(0)));
-        shortWeatherDescription.setText(homeWeatherInformation.getWeatherMainDescription(homeWeatherInformation.getOneDayFromForecast(0)));
-        longWeatherDescription.setText(homeWeatherInformation.getWeatherLongDescription(homeWeatherInformation.getOneDayFromForecast(0)));
-        Image image = iconResolver.getIconForWeather(homeWeatherInformation.getWeatherIconCode(homeWeatherInformation.getOneDayFromForecast(0)));
-        homeMainDayIcon.setImage(image);
+        fulfilMainDayTodayWeather(homeWeatherInformation,
+                homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY),
+                todaysDate,
+                shortWeatherDescription,
+                longWeatherDescription,
+                homeMainDayIcon,
+                homeMainDayTemperature,
+                homeMainTemperatureFeelsLike,
+                mainDayWind,
+                mainDayPressure,
+                mainDayCloudiness,
+                mainDayHumidity);
+        /*
+        todaysDate.setText(homeWeatherInformation.getDateOfWeather(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
+        homeMainDayTemperature.setText(homeWeatherInformation.getTemperature(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
+        homeMainTemperatureFeelsLike.setText(homeWeatherInformation.getTemperature(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
+        mainDayCloudiness.setText(homeWeatherInformation.getCloudiness(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
+        mainDayHumidity.setText(homeWeatherInformation.getHumidity(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
+        mainDayPressure.setText(homeWeatherInformation.getPressure(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
+        mainDayWind.setText(homeWeatherInformation.getWindSpeed(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
+        shortWeatherDescription.setText(homeWeatherInformation.getWeatherMainDescription(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
+        longWeatherDescription.setText(homeWeatherInformation.getWeatherLongDescription(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
+        Image image = iconResolver.getIconForWeather(homeWeatherInformation.getWeatherIconCode(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
+        homeMainDayIcon.setImage(image);*/
     }
 
     private void fulfilHomeWeatherForFourDayForecast(){
@@ -190,5 +202,31 @@ public class MainWindowController extends BaseController implements Initializabl
         tempMin.setText(weatherInformation.getMinTemperature(oneDayDataFromForecastList));
         tempMax.setText(weatherInformation.getMaxTemperature(oneDayDataFromForecastList));
         wind.setText(weatherInformation.getWindSpeed(oneDayDataFromForecastList));
+    }
+
+    private void fulfilMainDayTodayWeather(WeatherInformation weatherInformation,
+                                           JSONObject oneDayDataFromForecastList,
+                                           Label todaysDate,
+                                           Label forecastShortDescription,
+                                           Label forecastLongDescription,
+                                           ImageView weatherIcon,
+                                           Label mainTemperature,
+                                           Label temperatureFeelsLike,
+                                           Label wind,
+                                           Label pressure,
+                                           Label cloudiness,
+                                           Label humidity
+                                           ){
+        todaysDate.setText(weatherInformation.getDateOfWeather(oneDayDataFromForecastList));
+        forecastShortDescription.setText(weatherInformation.getWeatherMainDescription(oneDayDataFromForecastList));
+        forecastLongDescription.setText(homeWeatherInformation.getWeatherLongDescription(oneDayDataFromForecastList));
+        Image image = iconResolver.getIconForWeather(weatherInformation.getWeatherIconCode(oneDayDataFromForecastList));
+        weatherIcon.setImage(image);
+        mainTemperature.setText(homeWeatherInformation.getTemperature(oneDayDataFromForecastList));
+        temperatureFeelsLike.setText(homeWeatherInformation.getFeelsLikeTemperature(oneDayDataFromForecastList));
+        wind.setText(homeWeatherInformation.getWindSpeed(oneDayDataFromForecastList));
+        pressure.setText(homeWeatherInformation.getPressure(oneDayDataFromForecastList));
+        cloudiness.setText(homeWeatherInformation.getCloudiness(oneDayDataFromForecastList));
+        humidity.setText(homeWeatherInformation.getHumidity(oneDayDataFromForecastList));
     }
 }
