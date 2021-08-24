@@ -20,6 +20,12 @@ public class MainWindowController extends BaseController implements Initializabl
     private WeatherInformation homeWeatherInformation;
     private IconResolver iconResolver = new IconResolver();
 
+    final Integer INDEX_OF_TODAY_FIRST_DAY=0;
+    final Integer INDEX_OF_SECOND_DAY=1;
+    final Integer INDEX_OF_THIRD_DAY=2;
+    final Integer INDEX_OF_FOURTH_DAY=3;
+    final Integer INDEX_OF_FIFTH_DAY=4;
+
     @FXML
     private Label homeCity;
     @FXML
@@ -105,6 +111,7 @@ public class MainWindowController extends BaseController implements Initializabl
     void TestButtonAction() {
         homeWeatherInformation.setCityAndReloadData(cityPicker.getText());
         fulfilHomeWeatherDataForToday();
+        fulfilHomeWeatherForFourDayForecast();
         homeCity.setText(homeWeatherInformation.getCity());
     }
 
@@ -132,7 +139,7 @@ public class MainWindowController extends BaseController implements Initializabl
 
     private void fulfilHomeWeatherForFourDayForecast(){
         fulfilOneDayWeatherForecast(homeWeatherInformation,
-                homeWeatherInformation.getOneDayFromForecast(1),
+                homeWeatherInformation.getOneDayFromForecast(INDEX_OF_SECOND_DAY),
                 homeSecondDayDate,
                 homeSecondDayShortDescription,
                 homeSecondDayIcon,
@@ -140,6 +147,32 @@ public class MainWindowController extends BaseController implements Initializabl
                 homeSecondDayTempMax,
                 homeSecondDayWind
                 );
+        fulfilOneDayWeatherForecast(homeWeatherInformation,
+                homeWeatherInformation.getOneDayFromForecast(INDEX_OF_THIRD_DAY),
+                homeThirdDayDate,
+                homeThirdDayShortDescription,
+                homeThirdDayIcon,
+                homeThirdDayTempMin,
+                homeThirdDayTempMax,
+                homeSecondDayWind);
+
+        fulfilOneDayWeatherForecast(homeWeatherInformation,
+                homeWeatherInformation.getOneDayFromForecast(INDEX_OF_FOURTH_DAY),
+                homeFourthDayDate,
+                homeFourthDayShortDescription,
+                homeFourthDayIcon,
+                homeFourthDayTempMin,
+                homeFourthDayTempMax,
+                homeFourthDayWind);
+
+        fulfilOneDayWeatherForecast(homeWeatherInformation,
+                homeWeatherInformation.getOneDayFromForecast(INDEX_OF_FIFTH_DAY),
+                homeFifthDayDate,
+                homeFifthDayShortDescription,
+                homeFifthDayIcon,
+                homeFifthDayTempMin,
+                homeFifthDayTempMax,
+                homeFifthDayWind);
     }
 
     private void fulfilOneDayWeatherForecast(WeatherInformation weatherInformation,

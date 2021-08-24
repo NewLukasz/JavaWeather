@@ -95,7 +95,7 @@
             <Image url="@icons/04n.png" />
          </image>
       </ImageView>
-      <Label fx:id="homeeThirdDayShortDescription" layoutX="300.0" layoutY="244.0" prefHeight="17.0" prefWidth="107.0" text="Short Weather desciption" />
+      <Label fx:id="homeFourthDayShortDescription" layoutX="300.0" layoutY="244.0" prefHeight="17.0" prefWidth="107.0" text="Short Weather desciption" />
       <Label layoutX="317.0" layoutY="318.0" text="Min." />
       <Label layoutX="317.0" layoutY="335.0" prefHeight="17.0" prefWidth="25.0" text="Max." />
       <Label layoutX="316.0" layoutY="353.0" prefHeight="17.0" prefWidth="34.0" text="Wind:" />
@@ -108,7 +108,7 @@
             <Image url="@icons/04n.png" />
          </image>
       </ImageView>
-      <Label fx:id="homeFouthDayShortDescription" layoutX="441.0" layoutY="244.0" prefHeight="17.0" prefWidth="107.0" text="Short Weather desciption" />
+      <Label fx:id="homeFifthDayShortDescription" layoutX="441.0" layoutY="244.0" prefHeight="17.0" prefWidth="107.0" text="Short Weather desciption" />
       <Label layoutX="458.0" layoutY="318.0" text="Min." />
       <Label layoutX="458.0" layoutY="335.0" prefHeight="17.0" prefWidth="25.0" text="Max." />
       <Label layoutX="457.0" layoutY="353.0" prefHeight="17.0" prefWidth="34.0" text="Wind:" />

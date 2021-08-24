@@ -1,6 +1,5 @@
 package org.javaweather.model;
 
-import javafx.stage.Stage;
 import org.javaweather.controller.services.FetchWeatherService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 public class WeatherInformation {
     private FetchWeatherService fetchWeatherService = null;
     private JSONObject jsonObjectWithWeather = null;
-    private String city = "Berlin";
+    private String city = "Warszawa";
     private JSONObject firstDayForecast;
     private JSONObject secondDayForecast;
     private JSONObject thirdDayForecast;
@@ -29,7 +28,6 @@ public class WeatherInformation {
     public WeatherInformation(){
         this.fetchWeatherService = new FetchWeatherService(this.city);
         this.jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
-        listOfDaysData = new ArrayList<JSONObject>();
     }
 
     public JSONObject getFirstDayForecast() {
@@ -58,6 +56,7 @@ public class WeatherInformation {
         this.thirdDayForecast = inputArray.getJSONObject(INDEX_OF_THIRD_DAY_DATA_9AM);
         this.fourthDayForecast =inputArray.getJSONObject(INDEX_OF_FOURTH_DAY_DATA_9AM);
         this.fifthDayForecast = inputArray.getJSONObject(INDEX_OF_FIFTH_DAY_DATA_9AM);
+        listOfDaysData = new ArrayList<JSONObject>();
         this.listOfDaysData.add(this.firstDayForecast);
         this.listOfDaysData.add(this.secondDayForecast);
         this.listOfDaysData.add(this.thirdDayForecast);
