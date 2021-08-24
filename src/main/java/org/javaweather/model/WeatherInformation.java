@@ -1,9 +1,11 @@
 package org.javaweather.model;
 
+import javafx.stage.Stage;
 import org.javaweather.controller.services.FetchWeatherService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 
 public class WeatherInformation {
     private FetchWeatherService fetchWeatherService = null;
@@ -14,6 +16,7 @@ public class WeatherInformation {
     private JSONObject thirdDayForecast;
     private JSONObject fourthDayForecast;
     private JSONObject fifthDayForecast;
+    private ArrayList<JSONObject> listOfDaysData;
 
     final int INDEX_OF_FIRST_DAY_DATA_9AM = 0;
     final int INDEX_OF_SECOND_DAY_DATA_9AM = 8;
@@ -26,10 +29,15 @@ public class WeatherInformation {
     public WeatherInformation(){
         this.fetchWeatherService = new FetchWeatherService(this.city);
         this.jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
+        listOfDaysData = new ArrayList<JSONObject>();
     }
 
     public JSONObject getFirstDayForecast() {
         return firstDayForecast;
+    }
+
+    public JSONObject getOneDayFromForecast(Integer indexOfTheDay){
+        return this.listOfDaysData.get(indexOfTheDay);
     }
 
     public String getCity() {
@@ -50,6 +58,11 @@ public class WeatherInformation {
         this.thirdDayForecast = inputArray.getJSONObject(INDEX_OF_THIRD_DAY_DATA_9AM);
         this.fourthDayForecast =inputArray.getJSONObject(INDEX_OF_FOURTH_DAY_DATA_9AM);
         this.fifthDayForecast = inputArray.getJSONObject(INDEX_OF_FIFTH_DAY_DATA_9AM);
+        this.listOfDaysData.add(this.firstDayForecast);
+        this.listOfDaysData.add(this.secondDayForecast);
+        this.listOfDaysData.add(this.thirdDayForecast);
+        this.listOfDaysData.add(this.fourthDayForecast);
+        this.listOfDaysData.add(this.fifthDayForecast);
     }
 
     public String getDateOfWeather(JSONObject jsonObjectWithSingleDayData){
@@ -72,12 +85,12 @@ public class WeatherInformation {
         return convertTemperatureToStringAndAddCelsiusUnit(jsonObjectWithSingleDayData.getJSONObject("main").getDouble("temp"));
     }
 
-    public Double getMinTemperature(JSONObject jsonObjectWithSingleDayData){
-        return jsonObjectWithSingleDayData.getJSONObject("main").getDouble("temp_min");
+    public String getMinTemperature(JSONObject jsonObjectWithSingleDayData){
+        return convertTemperatureToStringAndAddCelsiusUnit(jsonObjectWithSingleDayData.getJSONObject("main").getDouble("temp_min"));
     }
 
-    public Double getMaxTemperature(JSONObject jsonObjectWithSingleDayData){
-        return jsonObjectWithSingleDayData.getJSONObject("main").getDouble("temp_max");
+    public String getMaxTemperature(JSONObject jsonObjectWithSingleDayData){
+        return convertTemperatureToStringAndAddCelsiusUnit(jsonObjectWithSingleDayData.getJSONObject("main").getDouble("temp_max"));
     }
 
     public Double getFeelsLikeTemperature(JSONObject jsonObjectWithSingleDayData){
