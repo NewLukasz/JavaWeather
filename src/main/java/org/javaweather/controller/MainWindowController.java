@@ -1,17 +1,20 @@
 package org.javaweather.controller;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import org.javaweather.WeatherManager;
 import org.javaweather.model.WeatherInformation;
 import org.javaweather.view.IconResolver;
 import org.javaweather.view.ViewFactory;
 import org.json.JSONObject;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -49,6 +52,7 @@ public class MainWindowController extends BaseController implements Initializabl
     private Label mainDayHumidity;
     @FXML
     private Label todaysDate;
+    /*
     @FXML
     private Label homeSecondDayDate;
     @FXML
@@ -61,6 +65,7 @@ public class MainWindowController extends BaseController implements Initializabl
     private Label homeSecondDayTempMax;
     @FXML
     private Label homeSecondDayWind;
+     */
     @FXML
     private Label homeThirdDayDate;
     @FXML
@@ -98,6 +103,12 @@ public class MainWindowController extends BaseController implements Initializabl
     @FXML
     private Label homeFifthDayWind;
 
+    @FXML
+    private Pane homeFirstDayWeather;
+
+    @FXML
+    private AnchorPane mainPane;
+
     public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory,String fxmlName){
         super(weatherManager,viewFactory,fxmlName);
         this.homeWeatherInformation = weatherManager.getHomeWeather();
@@ -112,6 +123,42 @@ public class MainWindowController extends BaseController implements Initializabl
         fulfilHomeWeatherDataForToday();
         fulfilHomeWeatherForFourDayForecast();
         homeCity.setText(homeWeatherInformation.getCity());
+        System.out.println(mainPane.getChildren());
+
+        for(Node node: mainPane.getChildren()){
+            if(node.getClass().equals(homeFirstDayWeather.getClass())){
+                System.out.println(node.getId());
+            }
+        }
+
+        ObservableList<Node> listWithFXMLComponents = homeFirstDayWeather.getChildren();
+        fulfilOneWeatherDayTestFunction(homeWeatherInformation,listWithFXMLComponents);
+
+    }
+
+    private void fulfilOneWeatherDayTestFunction(WeatherInformation weatherInformation, ObservableList<Node> listWithComponents){
+        JSONObject oneDayDataFromForecastList = homeWeatherInformation.getOneDayFromForecast(INDEX_OF_SECOND_DAY);
+        for(Node component:listWithComponents){
+            String idOfFXMLComponent=component.getId();
+            if(component.getClass().equals(this.homeFifthDayDate.getClass())){
+                if(idOfFXMLComponent.contains("Date")){
+                    ((Label) component).setText(weatherInformation.getDateOfWeather(oneDayDataFromForecastList));
+                }else if(idOfFXMLComponent.contains("Wind")){
+                    ((Label) component).setText(weatherInformation.getWindSpeed(oneDayDataFromForecastList));
+                }else if(idOfFXMLComponent.contains("Temp")&&component.getId().contains("Max")){
+                    ((Label) component).setText(weatherInformation.getMaxTemperature(oneDayDataFromForecastList));
+                }else if(idOfFXMLComponent.contains("Temp")&&component.getId().contains("Min")){
+                    ((Label) component).setText(weatherInformation.getMinTemperature(oneDayDataFromForecastList));
+                }else if(idOfFXMLComponent.contains("Description")){
+                    ((Label) component).setText(weatherInformation.getWeatherMainDescription(oneDayDataFromForecastList));
+                }
+            }else if(component.getClass().equals(this.homeFourthDayIcon.getClass())){
+                System.out.println("OK");
+                Image image = iconResolver.getIconForWeather(weatherInformation.getWeatherIconCode(oneDayDataFromForecastList));
+                ((ImageView) component).setImage(image);
+            }
+        }
+
     }
 
     @Override
@@ -135,21 +182,10 @@ public class MainWindowController extends BaseController implements Initializabl
                 mainDayPressure,
                 mainDayCloudiness,
                 mainDayHumidity);
-        /*
-        todaysDate.setText(homeWeatherInformation.getDateOfWeather(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
-        homeMainDayTemperature.setText(homeWeatherInformation.getTemperature(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
-        homeMainTemperatureFeelsLike.setText(homeWeatherInformation.getTemperature(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
-        mainDayCloudiness.setText(homeWeatherInformation.getCloudiness(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
-        mainDayHumidity.setText(homeWeatherInformation.getHumidity(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
-        mainDayPressure.setText(homeWeatherInformation.getPressure(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
-        mainDayWind.setText(homeWeatherInformation.getWindSpeed(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
-        shortWeatherDescription.setText(homeWeatherInformation.getWeatherMainDescription(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
-        longWeatherDescription.setText(homeWeatherInformation.getWeatherLongDescription(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
-        Image image = iconResolver.getIconForWeather(homeWeatherInformation.getWeatherIconCode(homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY)));
-        homeMainDayIcon.setImage(image);*/
     }
 
     private void fulfilHomeWeatherForFourDayForecast(){
+        /*
         fulfilOneDayWeatherForecast(homeWeatherInformation,
                 homeWeatherInformation.getOneDayFromForecast(INDEX_OF_SECOND_DAY),
                 homeSecondDayDate,
@@ -158,7 +194,8 @@ public class MainWindowController extends BaseController implements Initializabl
                 homeSecondDayTempMin,
                 homeSecondDayTempMax,
                 homeSecondDayWind
-                );
+                );*/
+
         fulfilOneDayWeatherForecast(homeWeatherInformation,
                 homeWeatherInformation.getOneDayFromForecast(INDEX_OF_THIRD_DAY),
                 homeThirdDayDate,
@@ -166,7 +203,7 @@ public class MainWindowController extends BaseController implements Initializabl
                 homeThirdDayIcon,
                 homeThirdDayTempMin,
                 homeThirdDayTempMax,
-                homeSecondDayWind);
+                homeThirdDayWind);
 
         fulfilOneDayWeatherForecast(homeWeatherInformation,
                 homeWeatherInformation.getOneDayFromForecast(INDEX_OF_FOURTH_DAY),
