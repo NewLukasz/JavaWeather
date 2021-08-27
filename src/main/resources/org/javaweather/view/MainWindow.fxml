@@ -8,116 +8,111 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="500.0" maxWidth="800.0" minHeight="500.0" minWidth="800.0" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #b3c6ff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainPane" maxHeight="620.0" maxWidth="800.0" minHeight="500.0" minWidth="800.0" prefHeight="620.0" prefWidth="800.0" style="-fx-background-color: #b3c6ff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b3c6ff" height="168.0" layoutX="429.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="132.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b3c6ff" height="168.0" layoutX="288.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="132.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b3c6ff" height="168.0" layoutX="149.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="132.0" />
-      <Button layoutX="520.0" layoutY="445.0" mnemonicParsing="false" onAction="#TestButtonAction" prefHeight="25.0" prefWidth="146.0" text="Test button" />
+      <Button layoutX="535.0" layoutY="17.0" mnemonicParsing="false" onAction="#TestButtonAction" prefHeight="25.0" prefWidth="146.0" text="Test button" />
       <Label layoutX="21.0" layoutY="14.0" prefHeight="30.0" prefWidth="236.0" text="Home location weather">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="homeCity" layoutX="21.0" layoutY="55.0" text="Home City">
+      <Label fx:id="homeCity" layoutX="21.0" layoutY="53.0" text="Home City">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="homeCountry" layoutX="21.0" layoutY="82.0" text="Home country">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="homeMainDayIcon" fitHeight="95.0" fitWidth="124.0" layoutX="21.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@icons/04d.png" />
-         </image></ImageView>
-      <Label fx:id="homeMainDayTemperature" layoutX="146.0" layoutY="88.0" text="20 st.C">
-         <font>
-            <Font size="36.0" />
-         </font></Label>
-      <TextField fx:id="cityPicker" layoutX="354.0" layoutY="445.0" />
-      <Label layoutX="149.0" layoutY="135.0" text="Feels like:" />
-      <Label fx:id="shortWeatherDescription" layoutX="277.0" layoutY="97.0" text="ShortWeatherDesciption">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="homeMainTemperatureFeelsLike" layoutX="206.0" layoutY="136.0" text="15st." />
-      <Label fx:id="longWeatherDescription" layoutX="277.0" layoutY="128.0" text="LongWeatherDesciption">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="145.0" layoutY="158.0" text="Pressure:" />
-      <Label fx:id="mainDayPressure" layoutX="204.0" layoutY="158.0" text="1032mbar" />
-      <Label layoutX="277.0" layoutY="158.0" text="Wind: " />
-      <Label layoutX="145.0" layoutY="180.0" text="Cloudines:" />
-      <Label fx:id="mainDayWind" layoutX="313.0" layoutY="158.0" text="10m/s" />
-      <Label fx:id="mainDayCloudiness" layoutX="204.0" layoutY="181.0" text="100%" />
-      <Label layoutX="277.0" layoutY="180.0" text="Humidity:" />
-      <Label fx:id="mainDayHumidity" layoutX="332.0" layoutY="180.0" text="100%" />
-      <Label layoutX="145.0" layoutY="74.0" text="Today is " />
-      <Label fx:id="todaysDate" layoutX="190.0" layoutY="74.0" text="23.08.2021" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b3c6ff" height="168.0" layoutX="8.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="132.0" />
-      <Label layoutX="37.0" layoutY="316.0" text="Min." />
-      <Label layoutX="37.0" layoutY="333.0" prefHeight="17.0" prefWidth="25.0" text="Max." />
-      <Label layoutX="36.0" layoutY="351.0" prefHeight="17.0" prefWidth="34.0" text="Wind:" />
-      <Label fx:id="homeThirdDayDate" layoutX="190.0" layoutY="226.0" text="24.08.2021" />
-      <ImageView fx:id="homeThirdDayIcon" fitHeight="65.0" fitWidth="71.0" layoutX="188.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@icons/04n.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="homeThirdDayShortDescription" layoutX="166.0" layoutY="244.0" prefHeight="17.0" prefWidth="107.0" text="Short Weather desciption" />
-      <Label layoutX="183.0" layoutY="318.0" text="Min." />
-      <Label layoutX="183.0" layoutY="335.0" prefHeight="17.0" prefWidth="25.0" text="Max." />
-      <Label layoutX="182.0" layoutY="353.0" prefHeight="17.0" prefWidth="34.0" text="Wind:" />
-      <Label fx:id="homeThirdDayTempMin" layoutX="215.0" layoutY="318.0" text="25st.C" />
-      <Label fx:id="homeThirdDayTempMax" layoutX="215.0" layoutY="336.0" text="25st.C" />
-      <Label fx:id="homeThirdDayWind" layoutX="215.0" layoutY="353.0" text="10m/s" />
-      <Label fx:id="homeFourthDayDate" layoutX="326.0" layoutY="226.0" text="24.08.2021" />
-      <ImageView fx:id="homeFourthDayIcon" fitHeight="65.0" fitWidth="71.0" layoutX="315.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@icons/04n.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="homeFourthDayShortDescription" layoutX="300.0" layoutY="244.0" prefHeight="17.0" prefWidth="107.0" text="Short Weather desciption" />
-      <Label layoutX="317.0" layoutY="318.0" text="Min." />
-      <Label layoutX="317.0" layoutY="335.0" prefHeight="17.0" prefWidth="25.0" text="Max." />
-      <Label layoutX="316.0" layoutY="353.0" prefHeight="17.0" prefWidth="34.0" text="Wind:" />
-      <Label fx:id="homeFourthDayTempMin" layoutX="349.0" layoutY="318.0" text="25st.C" />
-      <Label fx:id="homeFourthDayTempMax" layoutX="349.0" layoutY="336.0" text="25st.C" />
-      <Label fx:id="homeFourthDayWind" layoutX="349.0" layoutY="353.0" text="10m/s" />
-      <Label fx:id="homeFifthDayDate" layoutX="465.0" layoutY="226.0" text="24.08.2021" />
-      <ImageView fx:id="homeFifthDayIcon" fitHeight="65.0" fitWidth="71.0" layoutX="463.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@icons/04n.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="homeFifthDayShortDescription" layoutX="441.0" layoutY="244.0" prefHeight="17.0" prefWidth="107.0" text="Short Weather desciption" />
-      <Label layoutX="458.0" layoutY="318.0" text="Min." />
-      <Label layoutX="458.0" layoutY="335.0" prefHeight="17.0" prefWidth="25.0" text="Max." />
-      <Label layoutX="457.0" layoutY="353.0" prefHeight="17.0" prefWidth="34.0" text="Wind:" />
-      <Label fx:id="homeFifthDayTempMin" layoutX="490.0" layoutY="318.0" text="25st.C" />
-      <Label fx:id="homeFifthDayTempMax" layoutX="490.0" layoutY="336.0" text="25st.C" />
-      <Label fx:id="homeFifthDayWind" layoutX="490.0" layoutY="353.0" text="10m/s" />
-      <Pane fx:id="homeFirstDayWeather" layoutX="10.0" layoutY="216.0" prefHeight="177.0" prefWidth="139.0">
+      <TextField fx:id="cityPicker" layoutX="362.0" layoutY="17.0" />
+      <Pane fx:id="homeFirstDayPaneWeather" layoutX="10.0" layoutY="80.0" prefHeight="130.0" prefWidth="525.0" style="-fx-border-color: #000000; -fx-border-radius: 10; -fx-background-radius: 10;">
          <children>
-            <Label fx:id="homeSecondDayDate" layoutX="42.0" layoutY="4.0" text="FirstDayDate24.08.2021" />
-            <Label fx:id="homeSecondDayShortDescription" layoutX="42.0" layoutY="23.0" prefHeight="17.0" prefWidth="107.0" text="FirstDayShort Weather desciption" />
-            <ImageView fx:id="homeSecondDayIcon" fitHeight="65.0" fitWidth="71.0" layoutX="46.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homeFirstDayIcon" fitHeight="110.0" fitWidth="120.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/04d.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="130.0" layoutY="15.0" text="Today is " />
+            <Label fx:id="homeFirstDayDate" layoutX="177.0" layoutY="15.0" text="23.08.2021" />
+            <Label fx:id="homeFirstDayTemperature" layoutX="130.0" layoutY="55.0" text="20 st.C">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="homeFirstDayShortDescription" layoutX="130.0" layoutY="30.0" text="ShortWeatherDesciption">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="130.0" layoutY="85.0" text="Feels like:" />
+            <Label fx:id="homeFirstTemperatureFeelsLike" layoutX="180.0" layoutY="85.0" text="15st." />
+            <Label layoutX="230.0" layoutY="60.0" text="Pressure:" />
+            <Label layoutX="230.0" layoutY="80.0" text="Cloudines:" />
+            <Label fx:id="homeFirstDayPressure" layoutX="279.0" layoutY="60.0" text="1032mbar" />
+            <Label fx:id="homeFirstDayCloudiness" layoutX="286.0" layoutY="80.0" text="100%" />
+            <Label layoutX="345.0" layoutY="60.0" text="Wind: " />
+            <Label fx:id="homeFirstDayWind" layoutX="377.0" layoutY="60.0" text="10m/s" />
+            <Label layoutX="345.0" layoutY="80.0" text="Humidity:" />
+            <Label fx:id="homeFirstDayHumidity" layoutX="398.0" layoutY="80.0" text="100%" />
+         </children>
+      </Pane>
+      <Pane fx:id="homeSecondDayPaneWeather" layoutX="10.0" layoutY="230.0" prefHeight="140.0" prefWidth="120.0" style="-fx-border-color: #000000; -fx-border-radius: 10; -fx-background-radius: 10;">
+         <children>
+            <Label fx:id="homeSecondDayDate" layoutX="30.0" layoutY="5.0" text="SecondDayDate24.08.2021" />
+            <Label fx:id="homeSecondDayShortDescription" layoutX="45.0" layoutY="25.0" prefHeight="17.0" prefWidth="107.0" text="SecondDayShort Weather desciption" />
+            <ImageView fx:id="homeSecondDayIcon" fitHeight="65.0" fitWidth="71.0" layoutX="30.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons/04n.png" />
                </image>
             </ImageView>
-            <Label fx:id="homeSecondDayTempMin" layoutX="51.0" layoutY="100.0" text="FirstDayWeatherMin" />
-            <Label fx:id="homeSecondDayTempMax" layoutX="54.0" layoutY="117.0" text="FirstDayWeatherMax" />
-            <Label fx:id="homeSecondDayWind" layoutX="60.0" layoutY="135.0" text="FirstDayWindSpeed" />
+            <Label fx:id="homeSecondDayTemp" layoutX="50.0" layoutY="95.0" text="SecondDayWeather" />
+            <Label layoutX="17.0" layoutY="95.0" text="Temp:" />
+            <Label layoutX="17.0" layoutY="115.0" text="Wind:" />
+            <Label fx:id="homeSecondDayWind" layoutX="50.0" layoutY="115.0" text="SecondDayWindSpeed" />
+         </children>
+      </Pane>
+      <Pane fx:id="homeThirdDayPaneWeather" layoutX="145.0" layoutY="230.0" prefHeight="140.0" prefWidth="120.0" style="-fx-border-color: #000000; -fx-border-radius: 10; -fx-background-radius: 10;">
+         <children>
+            <Label fx:id="homeThirdDayDate" layoutX="30.0" layoutY="5.0" text="ThirdDayDate24.08.2021" />
+            <Label fx:id="homeThirdDayShortDescription" layoutX="45.0" layoutY="25.0" prefHeight="17.0" prefWidth="107.0" text="ThirdDayShort Weather desciption" />
+            <ImageView fx:id="homeThirdDayIcon" fitHeight="65.0" fitWidth="71.0" layoutX="30.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/04n.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="homeThirdDayTemp" layoutX="50.0" layoutY="95.0" text="ThirdDayWeather" />
+            <Label layoutX="17.0" layoutY="95.0" text="Temp:" />
+            <Label layoutX="17.0" layoutY="115.0" text="Wind:" />
+            <Label fx:id="homeThirdDayWind" layoutX="50.0" layoutY="115.0" text="ThirdDayWindSpeed" />
+         </children>
+      </Pane>
+      <Pane fx:id="homeFifthDayPaneWeather" layoutX="415.0" layoutY="230.0" prefHeight="140.0" prefWidth="120.0" style="-fx-border-color: #000000; -fx-border-radius: 10; -fx-background-radius: 10;">
+         <children>
+            <Label fx:id="homeFifthDayDate" layoutX="30.0" layoutY="5.0" text="FifthDayDate24.08.2021" />
+            <Label fx:id="homeFifthDayShortDescription" layoutX="45.0" layoutY="25.0" prefHeight="17.0" prefWidth="107.0" text="FifthDayShort Weather desciption" />
+            <ImageView fx:id="homeFifthDayIcon" fitHeight="65.0" fitWidth="71.0" layoutX="30.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/04n.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="homeFifthDayTemp" layoutX="50.0" layoutY="95.0" text="FifthDayWeather" />
+            <Label layoutX="17.0" layoutY="95.0" text="Temp:" />
+            <Label layoutX="17.0" layoutY="115.0" text="Wind:" />
+            <Label fx:id="homeFifthDayWind" layoutX="50.0" layoutY="115.0" text="FifthDayWindSpeed" />
+         </children>
+      </Pane>
+      <Pane fx:id="homeFourthDayPaneWeather" layoutX="280.0" layoutY="230.0" prefHeight="140.0" prefWidth="120.0" style="-fx-border-color: #000000; -fx-border-radius: 10; -fx-background-radius: 10;">
+         <children>
+            <Label fx:id="homeFourthDayDate" layoutX="30.0" layoutY="5.0" text="FourthDayDate24.08.2021" />
+            <Label fx:id="homeFourthDayShortDescription" layoutX="45.0" layoutY="25.0" prefHeight="17.0" prefWidth="107.0" text="FourthDayShort Weather desciption" />
+            <ImageView fx:id="homeFourthDayIcon" fitHeight="65.0" fitWidth="71.0" layoutX="30.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/04n.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="homeFourthDayTemp" layoutX="50.0" layoutY="95.0" text="FourthDayWeather" />
+            <Label layoutX="17.0" layoutY="95.0" text="Temp:" />
+            <Label layoutX="17.0" layoutY="115.0" text="Wind:" />
+            <Label fx:id="homeFourthDayWind" layoutX="50.0" layoutY="115.0" text="FourthDayWindSpeed" />
          </children>
       </Pane>
    </children>

@@ -22,7 +22,7 @@ public class MainWindowController extends BaseController implements Initializabl
     private WeatherInformation homeWeatherInformation;
     private IconResolver iconResolver = new IconResolver();
 
-    final Integer INDEX_OF_TODAY_FIRST_DAY=0;
+    final Integer INDEX_OF_FIRST_DAY=0;
     final Integer INDEX_OF_SECOND_DAY=1;
     final Integer INDEX_OF_THIRD_DAY=2;
     final Integer INDEX_OF_FOURTH_DAY=3;
@@ -30,8 +30,10 @@ public class MainWindowController extends BaseController implements Initializabl
 
     @FXML
     private Label homeCity;
+    /*
     @FXML
     private Label homeCountry;
+
     @FXML
     private ImageView homeMainDayIcon;
     @FXML
@@ -52,59 +54,21 @@ public class MainWindowController extends BaseController implements Initializabl
     private Label mainDayHumidity;
     @FXML
     private Label todaysDate;
-    /*
+    */
     @FXML
-    private Label homeSecondDayDate;
-    @FXML
-    private ImageView homeSecondDayIcon;
-    @FXML
-    private Label homeSecondDayShortDescription;
-    @FXML
-    private Label homeSecondDayTempMin;
-    @FXML
-    private Label homeSecondDayTempMax;
-    @FXML
-    private Label homeSecondDayWind;
-     */
-    @FXML
-    private Label homeThirdDayDate;
-    @FXML
-    private ImageView homeThirdDayIcon;
-    @FXML
-    private Label homeThirdDayShortDescription;
-    @FXML
-    private Label homeThirdDayTempMin;
-    @FXML
-    private Label homeThirdDayTempMax;
-    @FXML
-    private Label homeThirdDayWind;
-    @FXML
-    private Label homeFourthDayDate;
-    @FXML
-    private ImageView homeFourthDayIcon;
-    @FXML
-    private Label homeFourthDayShortDescription;
-    @FXML
-    private Label homeFourthDayTempMin;
-    @FXML
-    private Label homeFourthDayTempMax;
-    @FXML
-    private Label homeFourthDayWind;
-    @FXML
-    private Label homeFifthDayDate;
-    @FXML
-    private ImageView homeFifthDayIcon;
-    @FXML
-    private Label homeFifthDayShortDescription;
-    @FXML
-    private Label homeFifthDayTempMin;
-    @FXML
-    private Label homeFifthDayTempMax;
-    @FXML
-    private Label homeFifthDayWind;
+    private ImageView homeFirstDayIcon;
+
 
     @FXML
-    private Pane homeFirstDayWeather;
+    private Pane homeSecondDayPaneWeather;
+    @FXML
+    private Pane homeThirdDayPaneWeather;
+    @FXML
+    private Pane homeFourthDayPaneWeather;
+    @FXML
+    private Pane homeFifthDayPaneWeather;
+    @FXML
+    private Pane homeFirstDayPaneWeather;
 
     @FXML
     private AnchorPane mainPane;
@@ -120,150 +84,71 @@ public class MainWindowController extends BaseController implements Initializabl
     @FXML
     void TestButtonAction() {
         homeWeatherInformation.setCityAndReloadData(cityPicker.getText());
-        fulfilHomeWeatherDataForToday();
-        fulfilHomeWeatherForFourDayForecast();
+        fulfilHomeWeather();
         homeCity.setText(homeWeatherInformation.getCity());
-        System.out.println(mainPane.getChildren());
 
+        System.out.println(mainPane.getChildren());
+/*
         for(Node node: mainPane.getChildren()){
-            if(node.getClass().equals(homeFirstDayWeather.getClass())){
+            if(node.getClass().equals(homeSecondDayPaneWeather.getClass())){
                 System.out.println(node.getId());
             }
-        }
-
-        ObservableList<Node> listWithFXMLComponents = homeFirstDayWeather.getChildren();
-        fulfilOneWeatherDayTestFunction(homeWeatherInformation,listWithFXMLComponents);
+        }*/
+        fulfilOneWeatherDayTestFunction(INDEX_OF_FIRST_DAY,homeWeatherInformation,homeFirstDayPaneWeather.getChildren());
+        fulfilOneWeatherDayTestFunction(INDEX_OF_SECOND_DAY,homeWeatherInformation,homeSecondDayPaneWeather.getChildren());
+        fulfilOneWeatherDayTestFunction(INDEX_OF_THIRD_DAY,homeWeatherInformation,homeThirdDayPaneWeather.getChildren());
+        fulfilOneWeatherDayTestFunction(INDEX_OF_FOURTH_DAY,homeWeatherInformation,homeFourthDayPaneWeather.getChildren());
+        fulfilOneWeatherDayTestFunction(INDEX_OF_FIFTH_DAY,homeWeatherInformation,homeFifthDayPaneWeather.getChildren());
 
     }
 
-    private void fulfilOneWeatherDayTestFunction(WeatherInformation weatherInformation, ObservableList<Node> listWithComponents){
-        JSONObject oneDayDataFromForecastList = homeWeatherInformation.getOneDayFromForecast(INDEX_OF_SECOND_DAY);
+    private void fulfilOneWeatherDayTestFunction(Integer indexOfTheDay,WeatherInformation weatherInformation, ObservableList<Node> listWithComponents){
+        JSONObject oneDayDataFromForecastList = homeWeatherInformation.getOneDayFromForecast(indexOfTheDay);
         for(Node component:listWithComponents){
             String idOfFXMLComponent=component.getId();
-            if(component.getClass().equals(this.homeFifthDayDate.getClass())){
+            if(idOfFXMLComponent==null){
+                continue;
+            }
+            if(component.getClass().equals(this.homeCity.getClass())){
                 if(idOfFXMLComponent.contains("Date")){
                     ((Label) component).setText(weatherInformation.getDateOfWeather(oneDayDataFromForecastList));
                 }else if(idOfFXMLComponent.contains("Wind")){
                     ((Label) component).setText(weatherInformation.getWindSpeed(oneDayDataFromForecastList));
-                }else if(idOfFXMLComponent.contains("Temp")&&component.getId().contains("Max")){
-                    ((Label) component).setText(weatherInformation.getMaxTemperature(oneDayDataFromForecastList));
-                }else if(idOfFXMLComponent.contains("Temp")&&component.getId().contains("Min")){
-                    ((Label) component).setText(weatherInformation.getMinTemperature(oneDayDataFromForecastList));
+                }else if(idOfFXMLComponent.contains("FeelsLike")){
+                    ((Label) component).setText(weatherInformation.getFeelsLikeTemperature(oneDayDataFromForecastList));
+                }else if(idOfFXMLComponent.contains("Temp")){
+                    ((Label) component).setText(weatherInformation.getTemperature(oneDayDataFromForecastList));
                 }else if(idOfFXMLComponent.contains("Description")){
                     ((Label) component).setText(weatherInformation.getWeatherMainDescription(oneDayDataFromForecastList));
+                }else if(idOfFXMLComponent.contains("Pressure")){
+                    ((Label) component).setText(weatherInformation.getPressure(oneDayDataFromForecastList));
+                }else if(idOfFXMLComponent.contains("Cloudiness")){
+                    ((Label) component).setText(weatherInformation.getCloudiness(oneDayDataFromForecastList));
+                }else if(idOfFXMLComponent.contains("Humidity")){
+                    ((Label) component).setText(weatherInformation.getCloudiness(oneDayDataFromForecastList));
                 }
-            }else if(component.getClass().equals(this.homeFourthDayIcon.getClass())){
-                System.out.println("OK");
+
+            }else if(component.getClass().equals(this.homeFirstDayIcon.getClass())){
                 Image image = iconResolver.getIconForWeather(weatherInformation.getWeatherIconCode(oneDayDataFromForecastList));
                 ((ImageView) component).setImage(image);
             }
         }
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         homeWeatherInformation.setWeatherDataBasedOnFetchService();
         homeCity.setText(homeWeatherInformation.getCity());
-        fulfilHomeWeatherDataForToday();
-        fulfilHomeWeatherForFourDayForecast();
+        fulfilHomeWeather();
     }
 
-    private void fulfilHomeWeatherDataForToday(){
-        fulfilMainDayTodayWeather(homeWeatherInformation,
-                homeWeatherInformation.getOneDayFromForecast(INDEX_OF_TODAY_FIRST_DAY),
-                todaysDate,
-                shortWeatherDescription,
-                longWeatherDescription,
-                homeMainDayIcon,
-                homeMainDayTemperature,
-                homeMainTemperatureFeelsLike,
-                mainDayWind,
-                mainDayPressure,
-                mainDayCloudiness,
-                mainDayHumidity);
+
+    private void fulfilHomeWeather(){
+        fulfilOneWeatherDayTestFunction(INDEX_OF_FIRST_DAY,homeWeatherInformation,homeFirstDayPaneWeather.getChildren());
+        fulfilOneWeatherDayTestFunction(INDEX_OF_SECOND_DAY,homeWeatherInformation,homeSecondDayPaneWeather.getChildren());
+        fulfilOneWeatherDayTestFunction(INDEX_OF_THIRD_DAY,homeWeatherInformation,homeThirdDayPaneWeather.getChildren());
+        fulfilOneWeatherDayTestFunction(INDEX_OF_FOURTH_DAY,homeWeatherInformation,homeFourthDayPaneWeather.getChildren());
+        fulfilOneWeatherDayTestFunction(INDEX_OF_FIFTH_DAY,homeWeatherInformation,homeFifthDayPaneWeather.getChildren());
     }
 
-    private void fulfilHomeWeatherForFourDayForecast(){
-        /*
-        fulfilOneDayWeatherForecast(homeWeatherInformation,
-                homeWeatherInformation.getOneDayFromForecast(INDEX_OF_SECOND_DAY),
-                homeSecondDayDate,
-                homeSecondDayShortDescription,
-                homeSecondDayIcon,
-                homeSecondDayTempMin,
-                homeSecondDayTempMax,
-                homeSecondDayWind
-                );*/
-
-        fulfilOneDayWeatherForecast(homeWeatherInformation,
-                homeWeatherInformation.getOneDayFromForecast(INDEX_OF_THIRD_DAY),
-                homeThirdDayDate,
-                homeThirdDayShortDescription,
-                homeThirdDayIcon,
-                homeThirdDayTempMin,
-                homeThirdDayTempMax,
-                homeThirdDayWind);
-
-        fulfilOneDayWeatherForecast(homeWeatherInformation,
-                homeWeatherInformation.getOneDayFromForecast(INDEX_OF_FOURTH_DAY),
-                homeFourthDayDate,
-                homeFourthDayShortDescription,
-                homeFourthDayIcon,
-                homeFourthDayTempMin,
-                homeFourthDayTempMax,
-                homeFourthDayWind);
-
-        fulfilOneDayWeatherForecast(homeWeatherInformation,
-                homeWeatherInformation.getOneDayFromForecast(INDEX_OF_FIFTH_DAY),
-                homeFifthDayDate,
-                homeFifthDayShortDescription,
-                homeFifthDayIcon,
-                homeFifthDayTempMin,
-                homeFifthDayTempMax,
-                homeFifthDayWind);
-    }
-
-    private void fulfilOneDayWeatherForecast(WeatherInformation weatherInformation,
-                                             JSONObject oneDayDataFromForecastList,
-                                             Label forecastDate,
-                                             Label forecastShortDescription,
-                                             ImageView weatherIcon,
-                                             Label tempMin,
-                                             Label tempMax,
-                                             Label wind ){
-        forecastDate.setText(weatherInformation.getDateOfWeather(oneDayDataFromForecastList));
-        forecastShortDescription.setText(weatherInformation.getWeatherMainDescription(oneDayDataFromForecastList));
-        Image image = iconResolver.getIconForWeather(weatherInformation.getWeatherIconCode(oneDayDataFromForecastList));
-        weatherIcon.setImage(image);
-        tempMin.setText(weatherInformation.getMinTemperature(oneDayDataFromForecastList));
-        tempMax.setText(weatherInformation.getMaxTemperature(oneDayDataFromForecastList));
-        wind.setText(weatherInformation.getWindSpeed(oneDayDataFromForecastList));
-    }
-
-    private void fulfilMainDayTodayWeather(WeatherInformation weatherInformation,
-                                           JSONObject oneDayDataFromForecastList,
-                                           Label todaysDate,
-                                           Label forecastShortDescription,
-                                           Label forecastLongDescription,
-                                           ImageView weatherIcon,
-                                           Label mainTemperature,
-                                           Label temperatureFeelsLike,
-                                           Label wind,
-                                           Label pressure,
-                                           Label cloudiness,
-                                           Label humidity
-                                           ){
-        todaysDate.setText(weatherInformation.getDateOfWeather(oneDayDataFromForecastList));
-        forecastShortDescription.setText(weatherInformation.getWeatherMainDescription(oneDayDataFromForecastList));
-        forecastLongDescription.setText(homeWeatherInformation.getWeatherLongDescription(oneDayDataFromForecastList));
-        Image image = iconResolver.getIconForWeather(weatherInformation.getWeatherIconCode(oneDayDataFromForecastList));
-        weatherIcon.setImage(image);
-        mainTemperature.setText(homeWeatherInformation.getTemperature(oneDayDataFromForecastList));
-        temperatureFeelsLike.setText(homeWeatherInformation.getFeelsLikeTemperature(oneDayDataFromForecastList));
-        wind.setText(homeWeatherInformation.getWindSpeed(oneDayDataFromForecastList));
-        pressure.setText(homeWeatherInformation.getPressure(oneDayDataFromForecastList));
-        cloudiness.setText(homeWeatherInformation.getCloudiness(oneDayDataFromForecastList));
-        humidity.setText(homeWeatherInformation.getHumidity(oneDayDataFromForecastList));
-    }
 }
