@@ -31,10 +31,17 @@ public class WeatherInformation {
     }
 
     public String getCity() {
-        return city;
+        if(city.contains("+")){
+            return changePlusesToSpaces(city);
+        }else{
+            return city;
+        }
     }
 
     public void setCityAndReloadData(String city){
+        if(city.contains(" ")){
+            city = changeSpaceToPlus(city);
+        }
         this.city=city;
         this.fetchWeatherService = new FetchWeatherService(this.city);
         this.jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
@@ -50,6 +57,16 @@ public class WeatherInformation {
 
     public Boolean getChangeCityStatus(){
         return this.changeCityStatus;
+    }
+
+    private String changeSpaceToPlus(String stringWithSpaces){
+        String stringWithPluses = stringWithSpaces.replace(" ","+");
+        return stringWithPluses;
+    }
+
+    private String changePlusesToSpaces(String stringWithPluses){
+        String stringWithSpaces = stringWithPluses.replace("+"," ");
+        return stringWithSpaces;
     }
 
     public void setWeatherDataBasedOnFetchService(){
