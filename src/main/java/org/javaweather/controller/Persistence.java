@@ -32,8 +32,6 @@ public class Persistence {
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             this.homeCity = (String) objectInputStream.readObject();
             this.vacationDestination = (String) objectInputStream.readObject();
-            System.out.println(this.homeCity);
-            System.out.println(this.vacationDestination);
         } catch (Exception e) {
             e.printStackTrace();
         }
