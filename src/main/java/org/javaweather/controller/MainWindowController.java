@@ -86,6 +86,7 @@ public class MainWindowController extends BaseController implements Initializabl
         }
         fulfilHomeWeather();
         homeCity.setText(homeWeatherInformation.getCity()+ " ("+homeWeatherInformation.getCountry()+")");
+        weatherManager.saveCitiesPersistence(homeWeatherInformation.getCity(),vacationWeatherInformation.getCity());
         homeCityPicker.clear();
     }
 
@@ -103,6 +104,7 @@ public class MainWindowController extends BaseController implements Initializabl
         }
         fulfilVacationWeather();
         vacationCity.setText(vacationWeatherInformation.getCity()+ " ("+vacationWeatherInformation.getCountry()+")");
+        weatherManager.saveCitiesPersistence(homeWeatherInformation.getCity(),vacationWeatherInformation.getCity());
         vacationCityPicker.clear();
     }
 
