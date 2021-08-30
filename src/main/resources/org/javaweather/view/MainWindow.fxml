@@ -116,7 +116,7 @@
             <Label fx:id="homeFourthDayWind" layoutX="50.0" layoutY="115.0" text="FourthDayWindSpeed" />
          </children>
       </Pane>
-      <Label fx:id="homeCityErrorLabel" layoutX="326.0" layoutY="390.0" textFill="RED" />
+      <Label fx:id="homeCityErrorLabel" layoutX="340.0" layoutY="395.0" textFill="RED" />
       <Line endX="-22.0" endY="373.0" layoutX="600.0" layoutY="53.0" startX="-22.0" startY="-53.0" />
       <Label layoutX="780.0" layoutY="20.0" prefHeight="30.0" prefWidth="250.0" text="Vacation desination weather">
          <font>
@@ -219,8 +219,9 @@
             <Label fx:id="homeFifthDayWind1" layoutX="50.0" layoutY="115.0" text="FifthDayWindSpeed" />
          </children>
       </Pane>
-      <TextField fx:id="vacationCityPicker" layoutX="620.0" layoutY="390.0" promptText="Type new vacation city..." />
+      <TextField fx:id="vacationCityPicker" layoutX="610.0" layoutY="390.0" promptText="Type new vacation city..." />
       <Button layoutX="780.0" layoutY="390.0" mnemonicParsing="false" onAction="#ChangeVacationDestinationButtonAction" prefHeight="25.0" prefWidth="181.0" text="Change vacation destination" />
+      <Label fx:id="vacationDestinationErrorLabel" layoutX="980.0" layoutY="395.0" textFill="RED" />
    </children>
    <effect>
       <Blend />

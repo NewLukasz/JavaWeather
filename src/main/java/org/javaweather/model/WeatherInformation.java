@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class WeatherInformation {
     private FetchWeatherService fetchWeatherService = null;
     private JSONObject jsonObjectWithWeather = null;
-    private String city = "Warszawa";
+    private String city = null;
     private ArrayList<JSONObject> listOfDaysData;
     private Boolean changeCityStatus=true;
 
@@ -21,7 +21,8 @@ public class WeatherInformation {
 
     final int INDEX_OF_LAST_NECESSARY_DATE_SIGN=10;
 
-    public WeatherInformation(){
+    public WeatherInformation(String city){
+        this.city = city;
         this.fetchWeatherService = new FetchWeatherService(this.city);
         this.jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
     }

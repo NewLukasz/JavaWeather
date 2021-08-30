@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 
 public class MainWindowController extends BaseController implements Initializable {
     private WeatherInformation homeWeatherInformation;
+    private WeatherInformation vacationWeatherInformation;
     private IconResolver iconResolver = new IconResolver();
 
     final Integer INDEX_OF_FIRST_DAY=0;
@@ -43,20 +44,38 @@ public class MainWindowController extends BaseController implements Initializabl
     private Pane homeFourthDayPaneWeather;
     @FXML
     private Pane homeFifthDayPaneWeather;
+    @FXML
+    private TextField homeCityPicker;
+
+
+    @FXML
+    private Label vacationCity;
+    @FXML
+    private Pane vacationFirstDayPaneWeather;
+    @FXML
+    private Pane vacationSecondDayPaneWeather;
+    @FXML
+    private Pane vacationThirdDayPaneWeather;
+    @FXML
+    private Pane vacationFourthDayPaneWeather;
+    @FXML
+    private Pane vacationFifthDayPaneWeather;
+    @FXML
+    private TextField vacationCityPicker;
+    @FXML
+    private Label vacationDestinationErrorLabel;
 
 
     public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory,String fxmlName){
         super(weatherManager,viewFactory,fxmlName);
         this.homeWeatherInformation = weatherManager.getHomeWeather();
+        this.vacationWeatherInformation = weatherManager.getVacationWeather();
     }
-
-    @FXML
-    private TextField homeCityPicker;
 
     @FXML
     void ChangeHomeLocationButtonAction() {
         if(homeCityPicker.getText().equals("")){
-            homeCityErrorLabel.setText("You didn't type new home city");
+            homeCityErrorLabel.setText("You didn't type new value in text field");
             return;
         }
         homeWeatherInformation.setCityAndReloadData(homeCityPicker.getText());
@@ -67,10 +86,28 @@ public class MainWindowController extends BaseController implements Initializabl
         }
         fulfilHomeWeather();
         homeCity.setText(homeWeatherInformation.getCity()+ " ("+homeWeatherInformation.getCountry()+")");
+        homeCityPicker.clear();
     }
 
-    private void fulfilOneWeatherDayTestFunction(Integer indexOfTheDay,WeatherInformation weatherInformation, ObservableList<Node> listWithComponents){
-        JSONObject oneDayDataFromForecastList = homeWeatherInformation.getOneDayFromForecast(indexOfTheDay);
+    @FXML
+    void ChangeVacationDestinationButtonAction(){
+        if(vacationCityPicker.getText().equals("")){
+            vacationDestinationErrorLabel.setText("You didn't type new value in text field");
+            return;
+        }
+        vacationWeatherInformation.setCityAndReloadData(vacationCityPicker.getText());
+        if(!vacationWeatherInformation.getChangeCityStatus()){
+            vacationDestinationErrorLabel.setText("City is not found");
+        }else{
+            vacationDestinationErrorLabel.setText("");
+        }
+        fulfilVacationWeather();
+        vacationCity.setText(vacationWeatherInformation.getCity()+ " ("+vacationWeatherInformation.getCountry()+")");
+        vacationCityPicker.clear();
+    }
+
+    private void fulfilOneWeatherDayFunction(Integer indexOfTheDay, WeatherInformation weatherInformation, ObservableList<Node> listWithComponents){
+        JSONObject oneDayDataFromForecastList = weatherInformation.getOneDayFromForecast(indexOfTheDay);
         for(Node component:listWithComponents){
             String idOfFXMLComponent=component.getId();
             if(idOfFXMLComponent==null){
@@ -107,15 +144,27 @@ public class MainWindowController extends BaseController implements Initializabl
         homeWeatherInformation.setWeatherDataBasedOnFetchService();
         homeCity.setText(homeWeatherInformation.getCity()+ " ("+homeWeatherInformation.getCountry()+")");
         fulfilHomeWeather();
+
+        vacationCity.setText(vacationWeatherInformation.getCity() + " ("+vacationWeatherInformation.getCountry() + ")");
+        vacationWeatherInformation.setWeatherDataBasedOnFetchService();
+        fulfilVacationWeather();
     }
 
 
     private void fulfilHomeWeather(){
-        fulfilOneWeatherDayTestFunction(INDEX_OF_FIRST_DAY,homeWeatherInformation,homeFirstDayPaneWeather.getChildren());
-        fulfilOneWeatherDayTestFunction(INDEX_OF_SECOND_DAY,homeWeatherInformation,homeSecondDayPaneWeather.getChildren());
-        fulfilOneWeatherDayTestFunction(INDEX_OF_THIRD_DAY,homeWeatherInformation,homeThirdDayPaneWeather.getChildren());
-        fulfilOneWeatherDayTestFunction(INDEX_OF_FOURTH_DAY,homeWeatherInformation,homeFourthDayPaneWeather.getChildren());
-        fulfilOneWeatherDayTestFunction(INDEX_OF_FIFTH_DAY,homeWeatherInformation,homeFifthDayPaneWeather.getChildren());
+        fulfilOneWeatherDayFunction(INDEX_OF_FIRST_DAY,homeWeatherInformation,homeFirstDayPaneWeather.getChildren());
+        fulfilOneWeatherDayFunction(INDEX_OF_SECOND_DAY,homeWeatherInformation,homeSecondDayPaneWeather.getChildren());
+        fulfilOneWeatherDayFunction(INDEX_OF_THIRD_DAY,homeWeatherInformation,homeThirdDayPaneWeather.getChildren());
+        fulfilOneWeatherDayFunction(INDEX_OF_FOURTH_DAY,homeWeatherInformation,homeFourthDayPaneWeather.getChildren());
+        fulfilOneWeatherDayFunction(INDEX_OF_FIFTH_DAY,homeWeatherInformation,homeFifthDayPaneWeather.getChildren());
+    }
+
+    private  void fulfilVacationWeather(){
+        fulfilOneWeatherDayFunction(INDEX_OF_FIRST_DAY,vacationWeatherInformation,vacationFirstDayPaneWeather.getChildren());
+        fulfilOneWeatherDayFunction(INDEX_OF_SECOND_DAY,vacationWeatherInformation,vacationSecondDayPaneWeather.getChildren());
+        fulfilOneWeatherDayFunction(INDEX_OF_THIRD_DAY,vacationWeatherInformation,vacationThirdDayPaneWeather.getChildren());
+        fulfilOneWeatherDayFunction(INDEX_OF_FOURTH_DAY,vacationWeatherInformation,vacationFourthDayPaneWeather.getChildren());
+        fulfilOneWeatherDayFunction(INDEX_OF_FIFTH_DAY,vacationWeatherInformation,vacationFifthDayPaneWeather.getChildren());
     }
 
 }
