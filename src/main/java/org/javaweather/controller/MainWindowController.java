@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import org.javaweather.WeatherManager;
 import org.javaweather.model.WeatherInformation;
@@ -30,35 +29,10 @@ public class MainWindowController extends BaseController implements Initializabl
 
     @FXML
     private Label homeCity;
-    /*
-    @FXML
-    private Label homeCountry;
-
-    @FXML
-    private ImageView homeMainDayIcon;
-    @FXML
-    private Label homeMainDayTemperature;
-    @FXML
-    private Label shortWeatherDescription;
-    @FXML
-    private Label homeMainTemperatureFeelsLike;
-    @FXML
-    private Label longWeatherDescription;
-    @FXML
-    private Label mainDayPressure;
-    @FXML
-    private Label mainDayWind;
-    @FXML
-    private Label mainDayCloudiness;
-    @FXML
-    private Label mainDayHumidity;
-    @FXML
-    private Label todaysDate;
-    */
     @FXML
     private ImageView homeFirstDayIcon;
-
-
+    @FXML
+    private Pane homeFirstDayPaneWeather;
     @FXML
     private Pane homeSecondDayPaneWeather;
     @FXML
@@ -67,11 +41,7 @@ public class MainWindowController extends BaseController implements Initializabl
     private Pane homeFourthDayPaneWeather;
     @FXML
     private Pane homeFifthDayPaneWeather;
-    @FXML
-    private Pane homeFirstDayPaneWeather;
 
-    @FXML
-    private AnchorPane mainPane;
 
     public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory,String fxmlName){
         super(weatherManager,viewFactory,fxmlName);
@@ -79,27 +49,13 @@ public class MainWindowController extends BaseController implements Initializabl
     }
 
     @FXML
-    private TextField cityPicker;
+    private TextField homeCityPicker;
 
     @FXML
-    void TestButtonAction() {
-        homeWeatherInformation.setCityAndReloadData(cityPicker.getText());
+    void ChangeHomeLocationButtonAction() {
+        homeWeatherInformation.setCityAndReloadData(homeCityPicker.getText());
         fulfilHomeWeather();
         homeCity.setText(homeWeatherInformation.getCity());
-
-        System.out.println(mainPane.getChildren());
-/*
-        for(Node node: mainPane.getChildren()){
-            if(node.getClass().equals(homeSecondDayPaneWeather.getClass())){
-                System.out.println(node.getId());
-            }
-        }*/
-        fulfilOneWeatherDayTestFunction(INDEX_OF_FIRST_DAY,homeWeatherInformation,homeFirstDayPaneWeather.getChildren());
-        fulfilOneWeatherDayTestFunction(INDEX_OF_SECOND_DAY,homeWeatherInformation,homeSecondDayPaneWeather.getChildren());
-        fulfilOneWeatherDayTestFunction(INDEX_OF_THIRD_DAY,homeWeatherInformation,homeThirdDayPaneWeather.getChildren());
-        fulfilOneWeatherDayTestFunction(INDEX_OF_FOURTH_DAY,homeWeatherInformation,homeFourthDayPaneWeather.getChildren());
-        fulfilOneWeatherDayTestFunction(INDEX_OF_FIFTH_DAY,homeWeatherInformation,homeFifthDayPaneWeather.getChildren());
-
     }
 
     private void fulfilOneWeatherDayTestFunction(Integer indexOfTheDay,WeatherInformation weatherInformation, ObservableList<Node> listWithComponents){

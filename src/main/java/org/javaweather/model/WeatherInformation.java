@@ -23,6 +23,7 @@ public class WeatherInformation {
     public WeatherInformation(){
         this.fetchWeatherService = new FetchWeatherService(this.city);
         this.jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
+        System.out.println(jsonObjectWithWeather);
     }
 
     public JSONObject getOneDayFromForecast(Integer indexOfTheDay){
