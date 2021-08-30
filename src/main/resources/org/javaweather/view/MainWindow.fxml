@@ -23,7 +23,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="homeCityPicker" layoutX="14.0" layoutY="386.0" />
+      <TextField fx:id="homeCityPicker" layoutX="14.0" layoutY="386.0" promptText="Type new home city..." />
       <Pane fx:id="homeFirstDayPaneWeather" layoutX="10.0" layoutY="80.0" prefHeight="130.0" prefWidth="525.0" style="-fx-border-color: #000000; -fx-border-radius: 10; -fx-background-radius: 10;">
          <children>
             <ImageView fx:id="homeFirstDayIcon" fitHeight="110.0" fitWidth="120.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
@@ -115,6 +115,7 @@
             <Label fx:id="homeFourthDayWind" layoutX="50.0" layoutY="115.0" text="FourthDayWindSpeed" />
          </children>
       </Pane>
+      <Label fx:id="homeCityErrorLabel" layoutX="326.0" layoutY="390.0" textFill="RED" />
    </children>
    <effect>
       <Blend />

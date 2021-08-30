@@ -30,6 +30,8 @@ public class MainWindowController extends BaseController implements Initializabl
     @FXML
     private Label homeCity;
     @FXML
+    private Label homeCityErrorLabel;
+    @FXML
     private ImageView homeFirstDayIcon;
     @FXML
     private Pane homeFirstDayPaneWeather;
@@ -53,7 +55,16 @@ public class MainWindowController extends BaseController implements Initializabl
 
     @FXML
     void ChangeHomeLocationButtonAction() {
+        if(homeCityPicker.getText().equals("")){
+            homeCityErrorLabel.setText("You didn't type new home city");
+            return;
+        }
         homeWeatherInformation.setCityAndReloadData(homeCityPicker.getText());
+        if(!homeWeatherInformation.getChangeCityStatus()){
+            homeCityErrorLabel.setText("City is not found");
+        }else{
+            homeCityErrorLabel.setText("");
+        }
         fulfilHomeWeather();
         homeCity.setText(homeWeatherInformation.getCity()+ " ("+homeWeatherInformation.getCountry()+")");
     }

@@ -11,6 +11,7 @@ public class WeatherInformation {
     private JSONObject jsonObjectWithWeather = null;
     private String city = "Warszawa";
     private ArrayList<JSONObject> listOfDaysData;
+    private Boolean changeCityStatus=true;
 
     final int INDEX_OF_FIRST_DAY_DATA = 0;
     final int INDEX_OF_SECOND_DAY_DATA = 8;
@@ -37,7 +38,18 @@ public class WeatherInformation {
         this.city=city;
         this.fetchWeatherService = new FetchWeatherService(this.city);
         this.jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
+        if(this.jsonObjectWithWeather!=null){
+            this.changeCityStatus=true;
+        }
+        if(this.jsonObjectWithWeather==null){
+            this.changeCityStatus=false;
+            return;
+        }
         setWeatherDataBasedOnFetchService();
+    }
+
+    public Boolean getChangeCityStatus(){
+        return this.changeCityStatus;
     }
 
     public void setWeatherDataBasedOnFetchService(){
