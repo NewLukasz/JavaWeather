@@ -23,7 +23,6 @@ public class WeatherInformation {
     public WeatherInformation(){
         this.fetchWeatherService = new FetchWeatherService(this.city);
         this.jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
-        System.out.println(jsonObjectWithWeather);
     }
 
     public JSONObject getOneDayFromForecast(Integer indexOfTheDay){
@@ -54,6 +53,10 @@ public class WeatherInformation {
         this.listOfDaysData.add(thirdDayForecast);
         this.listOfDaysData.add(fourthDayForecast);
         this.listOfDaysData.add(fifthDayForecast);
+    }
+
+    public String getCountry(){
+        return jsonObjectWithWeather.getJSONObject("city").getString("country");
     }
 
     public String getDateOfWeather(JSONObject jsonObjectWithSingleDayData){

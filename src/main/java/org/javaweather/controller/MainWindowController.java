@@ -55,7 +55,7 @@ public class MainWindowController extends BaseController implements Initializabl
     void ChangeHomeLocationButtonAction() {
         homeWeatherInformation.setCityAndReloadData(homeCityPicker.getText());
         fulfilHomeWeather();
-        homeCity.setText(homeWeatherInformation.getCity());
+        homeCity.setText(homeWeatherInformation.getCity()+ " ("+homeWeatherInformation.getCountry()+")");
     }
 
     private void fulfilOneWeatherDayTestFunction(Integer indexOfTheDay,WeatherInformation weatherInformation, ObservableList<Node> listWithComponents){
@@ -94,7 +94,7 @@ public class MainWindowController extends BaseController implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         homeWeatherInformation.setWeatherDataBasedOnFetchService();
-        homeCity.setText(homeWeatherInformation.getCity());
+        homeCity.setText(homeWeatherInformation.getCity()+ " ("+homeWeatherInformation.getCountry()+")");
         fulfilHomeWeather();
     }
 
