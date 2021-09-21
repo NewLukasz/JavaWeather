@@ -11,8 +11,7 @@ import org.javaweather.controller.MainWindowController;
 import java.io.IOException;
 
 public class ViewFactory {
-    private WeatherManager weatherManager;
-    private boolean mainViewInitialized = false;
+    private final WeatherManager weatherManager;
 
     public ViewFactory(WeatherManager weatherManager){
         this.weatherManager = weatherManager;
@@ -21,7 +20,6 @@ public class ViewFactory {
     public void showMainWindow(){
         BaseController controller = new MainWindowController(weatherManager, this, "MainWindow.fxml");
         initializeStage(controller);
-        this.mainViewInitialized = true;
     }
 
     private void initializeStage(BaseController baseController){

@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="620.0" maxWidth="800.0" minHeight="426.0" minWidth="1200.0" prefHeight="426.0" prefWidth="800.0" style="-fx-background-color: #b3c6ff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="180.0" layoutY="390.0" mnemonicParsing="false" onAction="#ChangeHomeLocationButtonAction" prefHeight="25.0" prefWidth="146.0" text="Change home location" />
+      <Button layoutX="180.0" layoutY="390.0" mnemonicParsing="false" onAction="#changeHomeLocationButtonAction" prefHeight="25.0" prefWidth="146.0" text="Change home location" />
       <Label layoutX="180.0" layoutY="20.0" prefHeight="30.0" prefWidth="250.0" text="Home location weather">
          <font>
             <Font size="20.0" />
@@ -220,7 +220,7 @@
          </children>
       </Pane>
       <TextField fx:id="vacationCityPicker" layoutX="610.0" layoutY="390.0" promptText="Type new vacation city..." />
-      <Button layoutX="780.0" layoutY="390.0" mnemonicParsing="false" onAction="#ChangeVacationDestinationButtonAction" prefHeight="25.0" prefWidth="181.0" text="Change vacation destination" />
+      <Button layoutX="780.0" layoutY="390.0" mnemonicParsing="false" onAction="#changeVacationDestinationButtonAction" prefHeight="25.0" prefWidth="181.0" text="Change vacation destination" />
       <Label fx:id="vacationDestinationErrorLabel" layoutX="980.0" layoutY="395.0" textFill="RED" />
    </children>
    <effect>

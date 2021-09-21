@@ -13,41 +13,37 @@ import java.io.IOException;
 
 public class FetchWeatherService {
 
-    private String city;
     private JSONObject jsonWithWeatherData;
-    private Boolean getWeatherDataStatus;
+
+    public FetchWeatherService(String city) {
+        checkIfCityIsFoundAndAssignIfYes(city);
+    }
 
     public JSONObject getJsonWithWeatherData() {
         return jsonWithWeatherData;
     }
 
-
-    public FetchWeatherService(String city){
-        this.getWeatherDataStatus = false;
-        checkIfCityIsFoundAndAssignIfYes(city);
-    }
-
-    private boolean checkIfCityIsFoundAndAssignIfYes(String city){
+    private boolean checkIfCityIsFoundAndAssignIfYes(String city) {
         JSONObject jsonWithResponseData = getApiResponse(city);
         String messageFromApi = getMessageFromJsonApiResponse(jsonWithResponseData);
-        if(messageFromApi.equals(MessageCodes.getCityFound())){
-            this.jsonWithWeatherData=jsonWithResponseData;
-            return this.getWeatherDataStatus=true;
-        }else{
-            return this.getWeatherDataStatus=false;
+        if (messageFromApi.equals(MessageCodes.getCityFound())) {
+            jsonWithWeatherData = jsonWithResponseData;
+            return true;
+        } else {
+            return false;
         }
     }
 
-    private String getMessageFromJsonApiResponse(JSONObject jsonObjectWithMessage){
-        Integer codeOfMessage = jsonObjectWithMessage.getInt("cod");
+    private String getMessageFromJsonApiResponse(JSONObject jsonObjectWithMessage) {
+        int codeOfMessage = jsonObjectWithMessage.getInt("cod");
         return MessageCodes.getMessageBasedCode(codeOfMessage);
     }
 
-    private JSONObject getApiResponse(String city){
-        String urlToApi= "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&units=metric&appid="+ApiData.getApiKey();
+    private JSONObject getApiResponse(String city) {
+        String urlToApi = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=" + ApiData.getApiKey();
         CloseableHttpClient client = HttpClients.createDefault();
         HttpGet get = new HttpGet(urlToApi);
-        CloseableHttpResponse response = null;
+        CloseableHttpResponse response;
         try {
             response = client.execute(get);
             HttpEntity entity = response.getEntity();

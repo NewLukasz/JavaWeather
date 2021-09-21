@@ -4,12 +4,12 @@ import org.javaweather.controller.Persistence;
 import org.javaweather.model.WeatherInformation;
 
 public class WeatherManager {
-    Persistence persistence = new Persistence();
+    private final Persistence persistence = new Persistence();
     private String homeCity = "Warszawa";
     private String vacationDestination = "Londyn";
 
-    private WeatherInformation homeWeather = null;
-    private WeatherInformation vacationWeather = null;
+    private WeatherInformation homeWeather;
+    private WeatherInformation vacationWeather;
 
     public WeatherInformation getHomeWeather() {
         return homeWeather;
@@ -25,10 +25,11 @@ public class WeatherManager {
 
     public WeatherManager(){
         if(persistence.checkIfPersistenceIsAlreadyUsed()){
-            this.homeCity = persistence.getHomeCity();
-            this.vacationDestination = persistence.getVacationDestination();
+            homeCity = persistence.getHomeCity();
+            vacationDestination = persistence.getVacationDestination();
         }
-        homeWeather = new WeatherInformation(this.homeCity);
-        vacationWeather = new WeatherInformation(this.vacationDestination);
+        homeWeather = new WeatherInformation(homeCity);
+        vacationWeather = new WeatherInformation(vacationDestination);
     }
+
 }

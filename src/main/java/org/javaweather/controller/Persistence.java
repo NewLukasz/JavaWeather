@@ -3,7 +3,7 @@ package org.javaweather.controller;
 import java.io.*;
 
 public class Persistence {
-    private String CHOOSEN_CITIES_LOCATION = System.getProperty("user.home") + File.separator + "choosenCitiesWeatherApplication.ser";
+    private static final String CHOOSEN_CITIES_LOCATION = System.getProperty("user.home") + File.separator + "choosenCitiesWeatherApplication.ser";
     private String homeCity = null;
     private String vacationDestination = null;
 
@@ -47,7 +47,7 @@ public class Persistence {
 
     public Boolean checkIfPersistenceIsAlreadyUsed() {
         try {
-            FileInputStream fileInputStream = new FileInputStream(CHOOSEN_CITIES_LOCATION);
+            new FileInputStream(CHOOSEN_CITIES_LOCATION);
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
