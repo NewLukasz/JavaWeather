@@ -25,6 +25,11 @@ public class WeatherInformation {
     final private static int INDEX_OF_LAST_NECESSARY_DATE_SIGN = 10;
 
     public WeatherInformation() {
+        listOfDaysData = new ArrayList<>();
+    }
+
+    public Boolean getChangeCityStatus() {
+        return changeCityStatus;
     }
 
     public JSONObject getOneDayFromForecast(Integer indexOfTheDay) {
@@ -32,11 +37,7 @@ public class WeatherInformation {
     }
 
     public String getCity() {
-        if (city.contains("+")) {
-            return changePlusesToSpaces(city);
-        } else {
-            return city;
-        }
+        return convertPlusesToSpacesIfRequired(city);
     }
 
     public void setCityAndLoadDataFromAPI(String city) {
@@ -54,10 +55,6 @@ public class WeatherInformation {
         }
     }
 
-    public Boolean getChangeCityStatus() {
-        return changeCityStatus;
-    }
-
     public void setWeatherDataBasedOnFetchService() {
         JSONArray inputArray = (JSONArray) jsonObjectWithWeather.opt("list");
         JSONObject firstDayForecast = inputArray.getJSONObject(INDEX_OF_FIRST_DAY_DATA);
@@ -65,7 +62,7 @@ public class WeatherInformation {
         JSONObject thirdDayForecast = inputArray.getJSONObject(INDEX_OF_THIRD_DAY_DATA);
         JSONObject fourthDayForecast = inputArray.getJSONObject(INDEX_OF_FOURTH_DAY_DATA);
         JSONObject fifthDayForecast = inputArray.getJSONObject(INDEX_OF_FIFTH_DAY_DATA);
-        listOfDaysData = new ArrayList<JSONObject>();
+        listOfDaysData.clear();
         listOfDaysData.add(firstDayForecast);
         listOfDaysData.add(secondDayForecast);
         listOfDaysData.add(thirdDayForecast);
