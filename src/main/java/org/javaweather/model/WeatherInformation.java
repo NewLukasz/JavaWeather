@@ -1,6 +1,5 @@
 package org.javaweather.model;
 
-import org.javaweather.WeatherManager;
 import org.javaweather.controller.services.FetchWeatherService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,12 +24,6 @@ public class WeatherInformation {
 
     final private static int INDEX_OF_LAST_NECESSARY_DATE_SIGN = 10;
 
-    public WeatherInformation(String city) {
-        this.city = city;
-        fetchWeatherService = new FetchWeatherService(city);
-        jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
-    }
-
     public WeatherInformation() {
     }
 
@@ -46,7 +39,7 @@ public class WeatherInformation {
         }
     }
 
-    public void setCityAndReloadData(String city) {
+    public void setCityAndLoadDataFromAPI(String city) {
         if (city.contains(" ")) {
             city = changeSpaceToPlus(city);
         }
@@ -55,12 +48,10 @@ public class WeatherInformation {
         jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
         if (jsonObjectWithWeather != null) {
             changeCityStatus = true;
-        }
-        if (this.jsonObjectWithWeather == null) {
+            setWeatherDataBasedOnFetchService();
+        } else {
             changeCityStatus = false;
-            return;
         }
-        setWeatherDataBasedOnFetchService();
     }
 
     public Boolean getChangeCityStatus() {

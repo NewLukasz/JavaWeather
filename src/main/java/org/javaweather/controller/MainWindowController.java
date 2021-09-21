@@ -79,7 +79,7 @@ public class MainWindowController extends BaseController implements Initializabl
             homeCityErrorLabel.setText("You didn't type new value in text field");
             return;
         }
-        homeWeatherInformation.setCityAndReloadData(homeCityPicker.getText());
+        homeWeatherInformation.setCityAndLoadDataFromAPI(homeCityPicker.getText());
         if (!homeWeatherInformation.getChangeCityStatus()) {
             homeCityErrorLabel.setText("City is not found");
         } else {
@@ -97,7 +97,7 @@ public class MainWindowController extends BaseController implements Initializabl
             vacationDestinationErrorLabel.setText("You didn't type new value in text field");
             return;
         }
-        vacationWeatherInformation.setCityAndReloadData(vacationCityPicker.getText());
+        vacationWeatherInformation.setCityAndLoadDataFromAPI(vacationCityPicker.getText());
         if (!vacationWeatherInformation.getChangeCityStatus()) {
             vacationDestinationErrorLabel.setText("City is not found");
         } else {
