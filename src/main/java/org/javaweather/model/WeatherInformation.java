@@ -1,5 +1,6 @@
 package org.javaweather.model;
 
+import org.javaweather.WeatherManager;
 import org.javaweather.controller.services.FetchWeatherService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,6 +29,9 @@ public class WeatherInformation {
         this.city = city;
         fetchWeatherService = new FetchWeatherService(city);
         jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
+    }
+
+    public WeatherInformation() {
     }
 
     public JSONObject getOneDayFromForecast(Integer indexOfTheDay) {
