@@ -25,8 +25,8 @@ public class FetchWeatherService {
 
     private boolean checkIfCityIsFoundAndAssignIfYes(String city) {
         JSONObject jsonWithResponseData = getApiResponse(city);
-        String messageFromApi = getMessageFromJsonApiResponse(jsonWithResponseData);
-        if (messageFromApi.equals(MessageCodes.getCityFound())) {
+        MessageCode messageFromApi = getMessageFromJsonApiResponse(jsonWithResponseData);
+        if (messageFromApi == MessageCode.CITY_FOUND) {
             jsonWithWeatherData = jsonWithResponseData;
             return true;
         } else {
@@ -34,9 +34,9 @@ public class FetchWeatherService {
         }
     }
 
-    private String getMessageFromJsonApiResponse(JSONObject jsonObjectWithMessage) {
+    private MessageCode getMessageFromJsonApiResponse(JSONObject jsonObjectWithMessage) {
         int codeOfMessage = jsonObjectWithMessage.getInt("cod");
-        return MessageCodes.getMessageBasedCode(codeOfMessage);
+        return MessageCode.fromCode(codeOfMessage);
     }
 
     private JSONObject getApiResponse(String city) {
