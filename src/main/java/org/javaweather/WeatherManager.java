@@ -37,7 +37,8 @@ public class WeatherManager {
         if (persistence.checkPersistenceAndLoadIfIsInUse()) {
             homeWeather.setCityAndReloadData(persistence.getHomeCity());
             vacationWeather.setCityAndReloadData(persistence.getVacationDestination());
+            return true;
         }
-        return true;
+        return false;
     }
 }
