@@ -4,8 +4,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import org.javaweather.view.ViewFactory;
 
-import java.io.IOException;
-
 public class Launcher extends Application {
 
     public static void main(String[] args) {
@@ -14,7 +12,11 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) {
-        ViewFactory viewFactory = new ViewFactory(new WeatherManager());
+        WeatherManager weatherManager = new WeatherManager();
+        if(!weatherManager.checkPersistenceAndLoadIfIsInUse()){
+            weatherManager.setDefaultCities();
+        }
+        ViewFactory viewFactory = new ViewFactory(weatherManager);
         viewFactory.showMainWindow();
     }
 }

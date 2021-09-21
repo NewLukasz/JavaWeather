@@ -4,12 +4,12 @@ import java.io.*;
 
 public class Persistence {
     private static final String CHOOSEN_CITIES_LOCATION = System.getProperty("user.home") + File.separator + "choosenCitiesWeatherApplication.ser";
-    private String homeCity = null;
-    private String vacationDestination = null;
+    private String homeCity;
+    private String vacationDestination;
 
     public Persistence() {
-        loadToPersistence();
     }
+
     public void saveToPersistence(String homeLocation, String vacationDestination) {
         try {
             File file = new File(CHOOSEN_CITIES_LOCATION);
@@ -26,14 +26,16 @@ public class Persistence {
         }
     }
 
-    private void loadToPersistence() {
+    public boolean checkPersistenceAndLoadIfIsInUse() {
         try {
             FileInputStream fileInputStream = new FileInputStream(CHOOSEN_CITIES_LOCATION);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             this.homeCity = (String) objectInputStream.readObject();
             this.vacationDestination = (String) objectInputStream.readObject();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -43,15 +45,5 @@ public class Persistence {
 
     public String getVacationDestination() {
         return this.vacationDestination;
-    }
-
-    public Boolean checkIfPersistenceIsAlreadyUsed() {
-        try {
-            new FileInputStream(CHOOSEN_CITIES_LOCATION);
-            return true;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }
     }
 }

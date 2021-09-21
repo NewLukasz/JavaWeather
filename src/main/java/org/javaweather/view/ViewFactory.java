@@ -13,22 +13,22 @@ import java.io.IOException;
 public class ViewFactory {
     private final WeatherManager weatherManager;
 
-    public ViewFactory(WeatherManager weatherManager){
+    public ViewFactory(WeatherManager weatherManager) {
         this.weatherManager = weatherManager;
     }
 
-    public void showMainWindow(){
+    public void showMainWindow() {
         BaseController controller = new MainWindowController(weatherManager, this, "MainWindow.fxml");
         initializeStage(controller);
     }
 
-    private void initializeStage(BaseController baseController){
+    private void initializeStage(BaseController baseController) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(baseController.getFXMLname()));
         fxmlLoader.setController(baseController);
         Parent parent;
-        try{
+        try {
             parent = fxmlLoader.load();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             return;
         }

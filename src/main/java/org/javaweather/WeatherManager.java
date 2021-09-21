@@ -5,31 +5,39 @@ import org.javaweather.model.WeatherInformation;
 
 public class WeatherManager {
     private final Persistence persistence = new Persistence();
-    private String homeCity = "Warszawa";
-    private String vacationDestination = "Londyn";
+    private String homeCity;
+    private String vacationDestination;
 
-    private WeatherInformation homeWeather;
-    private WeatherInformation vacationWeather;
+    private WeatherInformation homeWeather = new WeatherInformation();
+    private WeatherInformation vacationWeather = new WeatherInformation();
+
+    public WeatherManager() {
+    }
+
+    public void setDefaultCities() {
+        homeCity = "Warszawa";
+        vacationDestination = "Londyn";
+        homeWeather = new WeatherInformation(homeCity);
+        vacationWeather = new WeatherInformation(vacationDestination);
+    }
 
     public WeatherInformation getHomeWeather() {
         return homeWeather;
     }
 
-    public  WeatherInformation getVacationWeather(){
+    public WeatherInformation getVacationWeather() {
         return vacationWeather;
     }
 
-    public void saveCitiesPersistence(String homeCity, String vacationDestination){
-        persistence.saveToPersistence(homeCity,vacationDestination);
+    public void saveCitiesPersistence(String homeCity, String vacationDestination) {
+        persistence.saveToPersistence(homeCity, vacationDestination);
     }
 
-    public WeatherManager(){
-        if(persistence.checkIfPersistenceIsAlreadyUsed()){
-            homeCity = persistence.getHomeCity();
-            vacationDestination = persistence.getVacationDestination();
+    public boolean checkPersistenceAndLoadIfIsInUse() {
+        if (persistence.checkPersistenceAndLoadIfIsInUse()) {
+            homeWeather.setCityAndReloadData(persistence.getHomeCity());
+            vacationWeather.setCityAndReloadData(persistence.getVacationDestination());
         }
-        homeWeather = new WeatherInformation(homeCity);
-        vacationWeather = new WeatherInformation(vacationDestination);
+        return true;
     }
-
 }
