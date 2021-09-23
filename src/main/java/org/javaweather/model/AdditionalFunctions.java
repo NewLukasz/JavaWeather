@@ -16,4 +16,12 @@ public class AdditionalFunctions {
     public static JSONObject convertOneElementJsonArrayToJsonObject(JSONArray oneElementJsonArray) {
         return oneElementJsonArray.getJSONObject(0);
     }
+
+    public static String convertPlusesToSpacesIfRequired(String city){
+        if (city.contains("+")) {
+            return changePlusesToSpaces(city);
+        } else {
+            return city;
+        }
+    }
 }

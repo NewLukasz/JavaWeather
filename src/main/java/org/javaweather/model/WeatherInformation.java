@@ -1,6 +1,5 @@
 package org.javaweather.model;
 
-import org.javaweather.WeatherManager;
 import org.javaweather.controller.services.FetchWeatherService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,13 +24,12 @@ public class WeatherInformation {
 
     final private static int INDEX_OF_LAST_NECESSARY_DATE_SIGN = 10;
 
-    public WeatherInformation(String city) {
-        this.city = city;
-        fetchWeatherService = new FetchWeatherService(city);
-        jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
+    public WeatherInformation() {
+        listOfDaysData = new ArrayList<>();
     }
 
-    public WeatherInformation() {
+    public Boolean getChangeCityStatus() {
+        return changeCityStatus;
     }
 
     public JSONObject getOneDayFromForecast(Integer indexOfTheDay) {
@@ -39,14 +37,10 @@ public class WeatherInformation {
     }
 
     public String getCity() {
-        if (city.contains("+")) {
-            return changePlusesToSpaces(city);
-        } else {
-            return city;
-        }
+        return convertPlusesToSpacesIfRequired(city);
     }
 
-    public void setCityAndReloadData(String city) {
+    public void setCityAndLoadDataFromAPI(String city) {
         if (city.contains(" ")) {
             city = changeSpaceToPlus(city);
         }
@@ -55,16 +49,10 @@ public class WeatherInformation {
         jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
         if (jsonObjectWithWeather != null) {
             changeCityStatus = true;
-        }
-        if (this.jsonObjectWithWeather == null) {
+            setWeatherDataBasedOnFetchService();
+        } else {
             changeCityStatus = false;
-            return;
         }
-        setWeatherDataBasedOnFetchService();
-    }
-
-    public Boolean getChangeCityStatus() {
-        return changeCityStatus;
     }
 
     public void setWeatherDataBasedOnFetchService() {
@@ -74,7 +62,7 @@ public class WeatherInformation {
         JSONObject thirdDayForecast = inputArray.getJSONObject(INDEX_OF_THIRD_DAY_DATA);
         JSONObject fourthDayForecast = inputArray.getJSONObject(INDEX_OF_FOURTH_DAY_DATA);
         JSONObject fifthDayForecast = inputArray.getJSONObject(INDEX_OF_FIFTH_DAY_DATA);
-        listOfDaysData = new ArrayList<JSONObject>();
+        listOfDaysData.clear();
         listOfDaysData.add(firstDayForecast);
         listOfDaysData.add(secondDayForecast);
         listOfDaysData.add(thirdDayForecast);

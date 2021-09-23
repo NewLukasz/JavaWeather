@@ -14,11 +14,11 @@ public class WeatherManager {
     public WeatherManager() {
     }
 
-    public void setDefaultCities() {
+    public void setDefaultCitiesAndLoadFromAPI() {
         homeCity = "Warszawa";
         vacationDestination = "Londyn";
-        homeWeather = new WeatherInformation(homeCity);
-        vacationWeather = new WeatherInformation(vacationDestination);
+        homeWeather.setCityAndLoadDataFromAPI(homeCity);
+        vacationWeather.setCityAndLoadDataFromAPI(vacationDestination);
     }
 
     public WeatherInformation getHomeWeather() {
@@ -33,10 +33,10 @@ public class WeatherManager {
         persistence.saveToPersistence(homeCity, vacationDestination);
     }
 
-    public boolean checkPersistenceAndLoadIfIsInUse() {
+    public boolean checkPersistenceAndLoadFromAPIIfIsInUse() {
         if (persistence.checkPersistenceAndLoadIfIsInUse()) {
-            homeWeather.setCityAndReloadData(persistence.getHomeCity());
-            vacationWeather.setCityAndReloadData(persistence.getVacationDestination());
+            homeWeather.setCityAndLoadDataFromAPI(persistence.getHomeCity());
+            vacationWeather.setCityAndLoadDataFromAPI(persistence.getVacationDestination());
             return true;
         }
         return false;
