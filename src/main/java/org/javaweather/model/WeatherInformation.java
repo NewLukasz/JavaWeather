@@ -49,7 +49,9 @@ public class WeatherInformation {
             city = changeSpaceToPlus(city);
         }
         this.city = city;
-        fetchWeatherService = new FetchWeatherService(this.city);
+        fetchWeatherService = new FetchWeatherService();
+        fetchWeatherService.setCity(city);
+        fetchWeatherService.fetchDataFromServerProcedure();
         jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
         if (jsonObjectWithWeather != null) {
             changeCityStatus = true;
