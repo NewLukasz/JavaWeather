@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class AdditionalFunctions {
 
-    public static String changePlusesToSpaces(String stringWithPluses) {
+    public static String changePlusToSpace(String stringWithPluses) {
         return stringWithPluses.replace("+", " ");
     }
 
@@ -17,9 +17,9 @@ public class AdditionalFunctions {
         return oneElementJsonArray.getJSONObject(0);
     }
 
-    public static String convertPlusesToSpacesIfRequired(String city){
+    public static String convertPlusToSpaceIfRequired(String city){
         if (city.contains("+")) {
-            return changePlusesToSpaces(city);
+            return changePlusToSpace(city);
         } else {
             return city;
         }

@@ -15,6 +15,16 @@ public class FetchWeatherService {
 
     private JSONObject jsonWithWeatherData;
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    private String city;
+
+    public FetchWeatherService(){
+
+    }
+
     public FetchWeatherService(String city) {
         checkIfCityIsFoundAndAssignIfYes(city);
     }
@@ -23,7 +33,7 @@ public class FetchWeatherService {
         return jsonWithWeatherData;
     }
 
-    private boolean checkIfCityIsFoundAndAssignIfYes(String city) {
+    public boolean checkIfCityIsFoundAndAssignIfYes(String city) {
         JSONObject jsonWithResponseData = getApiResponse(city);
         MessageCode messageFromApi = getMessageFromJsonApiResponse(jsonWithResponseData);
         if (messageFromApi == MessageCode.CITY_FOUND) {

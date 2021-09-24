@@ -37,7 +37,11 @@ public class WeatherInformation {
     }
 
     public String getCity() {
-        return convertPlusesToSpacesIfRequired(city);
+        return convertPlusToSpaceIfRequired(city);
+    }
+
+    public List<JSONObject> getListOfDaysData() {
+        return listOfDaysData;
     }
 
     public void setCityAndLoadDataFromAPI(String city) {
