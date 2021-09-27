@@ -6,7 +6,7 @@ module org.javaweather {
     requires org.json;
 
     opens org.javaweather to javafx.fxml;
-    exports org.javaweather;
+    //exports org.javaweather;
     opens org.javaweather.view to javafx.fxml;
     exports org.javaweather.controller;
     opens org.javaweather.controller to javafx.fxml;
