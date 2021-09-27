@@ -73,6 +73,15 @@ public class MainWindowController extends BaseController implements Initializabl
         this.vacationWeatherInformation = weatherManager.getVacationWeather();
     }
 
+
+    public WeatherInformation getHomeWeatherInformation() {
+        return homeWeatherInformation;
+    }
+
+    public WeatherInformation getVacationWeatherInformation() {
+        return vacationWeatherInformation;
+    }
+
     @FXML
     void changeHomeLocationButtonAction() {
         if (homeCityPicker.getText().equals("")) {

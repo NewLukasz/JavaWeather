@@ -13,7 +13,7 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) {
         WeatherManager weatherManager = new WeatherManager();
-        if(!weatherManager.checkPersistenceAndLoadFromAPIIfIsInUse()){
+        if (!weatherManager.checkPersistenceAndLoadFromAPIIfIsInUse()) {
             weatherManager.setDefaultCitiesAndLoadFromAPI();
         }
         ViewFactory viewFactory = new ViewFactory(weatherManager);

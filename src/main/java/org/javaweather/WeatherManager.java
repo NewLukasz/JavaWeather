@@ -4,7 +4,7 @@ import org.javaweather.controller.Persistence;
 import org.javaweather.model.WeatherInformation;
 
 public class WeatherManager {
-    private final Persistence persistence = new Persistence();
+    private Persistence persistence = new Persistence("chosenCitiesWeatherApplication.ser");
     private String homeCity;
     private String vacationDestination;
 

@@ -37,7 +37,11 @@ public class WeatherInformation {
     }
 
     public String getCity() {
-        return convertPlusesToSpacesIfRequired(city);
+        return convertPlusToSpaceIfRequired(city);
+    }
+
+    public List<JSONObject> getListOfDaysData() {
+        return listOfDaysData;
     }
 
     public void setCityAndLoadDataFromAPI(String city) {
@@ -45,14 +49,20 @@ public class WeatherInformation {
             city = changeSpaceToPlus(city);
         }
         this.city = city;
-        fetchWeatherService = new FetchWeatherService(this.city);
-        jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
+        fetchWeatherService = new FetchWeatherService();
+        fetchWeatherService.setCity(city);
+        fetchWeatherService.fetchDataFromServerProcedure();
+        setJsonObjectWithWeatherBasedOnFetchWeatherService(fetchWeatherService.getJsonWithWeatherData());
         if (jsonObjectWithWeather != null) {
             changeCityStatus = true;
             setWeatherDataBasedOnFetchService();
         } else {
             changeCityStatus = false;
         }
+    }
+
+    public void setJsonObjectWithWeatherBasedOnFetchWeatherService(JSONObject jsonObjectWithWeather) {
+        this.jsonObjectWithWeather = jsonObjectWithWeather;
     }
 
     public void setWeatherDataBasedOnFetchService() {
