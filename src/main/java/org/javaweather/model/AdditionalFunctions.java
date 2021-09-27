@@ -10,7 +10,11 @@ public class AdditionalFunctions {
     }
 
     public static String changeSpaceToPlus(String stringWithSpaces) {
-        return stringWithSpaces.replace(" ", "+");
+        if(stringWithSpaces!=null){
+            return stringWithSpaces.replace(" ", "+");
+        }else{
+            return "";
+        }
     }
 
     public static JSONObject convertOneElementJsonArrayToJsonObject(JSONArray oneElementJsonArray) {

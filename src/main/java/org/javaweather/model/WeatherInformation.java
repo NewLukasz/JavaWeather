@@ -52,13 +52,17 @@ public class WeatherInformation {
         fetchWeatherService = new FetchWeatherService();
         fetchWeatherService.setCity(city);
         fetchWeatherService.fetchDataFromServerProcedure();
-        jsonObjectWithWeather = fetchWeatherService.getJsonWithWeatherData();
+        setJsonObjectWithWeatherBasedOnFetchWeatherService(fetchWeatherService.getJsonWithWeatherData());
         if (jsonObjectWithWeather != null) {
             changeCityStatus = true;
             setWeatherDataBasedOnFetchService();
         } else {
             changeCityStatus = false;
         }
+    }
+
+    public void setJsonObjectWithWeatherBasedOnFetchWeatherService(JSONObject jsonObjectWithWeather){
+        this.jsonObjectWithWeather=jsonObjectWithWeather;
     }
 
     public void setWeatherDataBasedOnFetchService() {

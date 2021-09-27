@@ -5,36 +5,47 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.*;
 
 class FetchWeatherServiceTest {
+
     @Test
-    void makeApiQueryAndSetApiResponseShouldSetApiResponse(){
+    void shouldFindCityInFoundCityApiResponse() {
         //given
         FetchWeatherService fetchWeatherService = new FetchWeatherService();
-        fetchWeatherService.setCity("Ankara");
-
-        JSONObject jsonObject = getPreparedJsonObjectWithWeatherData();
-
         Api api = mock(Api.class);
-
-        //System.out.println(jsonObject);
-        given(api.makeApiQueryAndSetApiResponse()).willReturn(jsonObject);
-
-        fetchWeatherService.fetchDataFromServerProcedure();
-        System.out.println(fetchWeatherService.getApiResponse());
+        given(api.getApiResponse()).willReturn(getJsonObjectFromFile("FoundCityExampleResponseFromApi"));
+        //when
+        fetchWeatherService.setApiResponse(api.getApiResponse());
+        MessageCode messageCodeFromApiResponse = fetchWeatherService.getMessageFromJsonApiResponse();
+        // then
+        assertThat(messageCodeFromApiResponse,equalTo(MessageCode.CITY_FOUND));
     }
 
-    public JSONObject getPreparedJsonObjectWithWeatherData() {
+    @Test
+    void shouldNotFindCityInNotFoundCityApiResponse(){
+        //given
+        FetchWeatherService fetchWeatherService = new FetchWeatherService();
+        Api api = mock(Api.class);
+        given(api.getApiResponse()).willReturn(getJsonObjectFromFile("NotFoundCityExampleResponseFromApi"));
+        //when
+        fetchWeatherService.setApiResponse(api.getApiResponse());
+        MessageCode messageCodeFromApiResponse = fetchWeatherService.getMessageFromJsonApiResponse();
+        // then
+        assertThat(messageCodeFromApiResponse,equalTo(MessageCode.CITY_NOT_FOUND));
+    }
+
+    private JSONObject getJsonObjectFromFile(String fileName){
         try {
-            String inputStringFromResources = new String(getClass().getClassLoader().getResourceAsStream("ExampleResponseFromApi").readAllBytes());
+            String inputStringFromResources = new String(getClass().getClassLoader().getResourceAsStream(fileName).readAllBytes());
             return new JSONObject(inputStringFromResources);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return new JSONObject();
     }
+
 }

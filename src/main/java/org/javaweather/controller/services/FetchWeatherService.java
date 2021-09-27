@@ -14,29 +14,30 @@ public class FetchWeatherService {
         return jsonWithWeatherData;
     }
 
-    public JSONObject getApiResponse() {
-        return apiResponse;
-    }
     public void setCity(String city) {
         this.city = city;
     }
 
     public FetchWeatherService() {
-
+        api = new Api();
     }
 
     public void makeApiQueryAndSetApiResponse() {
-        api = new Api();
         api.setCity(city);
-        apiResponse = api.setApiResponseAfterQuery();
+        api.makeApiQuery();
+        setApiResponse(api.getApiResponse());
     }
 
-    private MessageCode getMessageFromJsonApiResponse() {
+    public void setApiResponse(JSONObject apiResponse) {
+        this.apiResponse = apiResponse;
+    }
+
+    public MessageCode getMessageFromJsonApiResponse() {
         int codeOfMessage = apiResponse.getInt("cod");
         return MessageCode.fromCode(codeOfMessage);
     }
 
-    public boolean isCityFoundBaseApiResponse() {
+    private boolean isCityFoundBaseApiResponse() {
         if (getMessageFromJsonApiResponse() == MessageCode.CITY_FOUND) {
             return true;
         } else {
@@ -44,15 +45,15 @@ public class FetchWeatherService {
         }
     }
 
-    public void checkMessageFromApiAndAssignJsonObjectWithDataIfCityFound() {
+    private void checkMessageFromApiAndAssignJsonObjectWithDataIfCityFound() {
         if (isCityFoundBaseApiResponse()) {
             jsonWithWeatherData = apiResponse;
         }
     }
 
-    public void fetchDataFromServerProcedure(){
+    public void fetchDataFromServerProcedure() {
         makeApiQueryAndSetApiResponse();
-        if(isCityFoundBaseApiResponse()){
+        if (isCityFoundBaseApiResponse()) {
             checkMessageFromApiAndAssignJsonObjectWithDataIfCityFound();
         }
     }

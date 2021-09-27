@@ -32,15 +32,9 @@ public class Api {
         this.apiResponse = apiResponse;
     }
 
-    public void setApiResponseBasedOnApiQueryResult(JSONObject jsonWithResponseData ){
-        apiResponse = jsonWithResponseData;
-    }
-
     private String getApiKey() {
         return "842bc442024d008401d44dfcb60ce43a";
     }
-
-
 
     public JSONObject makeApiQueryAndSetApiResponse() {
         String cityWithPlus = changeSpaceToPlus(city);
@@ -53,7 +47,6 @@ public class Api {
             HttpEntity entity = response.getEntity();
             JSONObject jsonWithResponseData = new JSONObject(EntityUtils.toString(entity));
             response.close();
-            setApiResponseBasedOnApiQueryResult(jsonWithResponseData);
             return jsonWithResponseData;
         } catch (IOException e) {
             e.printStackTrace();
@@ -61,8 +54,7 @@ public class Api {
         }
     }
 
-    public JSONObject setApiResponseAfterQuery(){
-        return apiResponse= makeApiQueryAndSetApiResponse();
+    public void makeApiQuery() {
+        apiResponse=makeApiQueryAndSetApiResponse();
     }
-
 }
