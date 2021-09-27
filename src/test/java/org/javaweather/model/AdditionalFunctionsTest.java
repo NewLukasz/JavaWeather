@@ -43,13 +43,13 @@ class AdditionalFunctionsTest {
     }
 
     @Test
-    void convertPlusToSpaceIfRequiredShouldReturnStringWithPlus(){
+    void convertPlusToSpaceIfRequiredShouldReturnStringWithPlus() {
         //given
-        String stringWithPlus="String+String";
+        String stringWithPlus = "String+String";
         //when
-        String stringWithSpace=convertPlusToSpaceIfRequired(stringWithPlus);
+        String stringWithSpace = convertPlusToSpaceIfRequired(stringWithPlus);
         //then
-        assertThat(stringWithSpace,containsString(" "));
+        assertThat(stringWithSpace, containsString(" "));
     }
 
 }

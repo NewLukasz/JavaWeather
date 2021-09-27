@@ -61,8 +61,8 @@ public class WeatherInformation {
         }
     }
 
-    public void setJsonObjectWithWeatherBasedOnFetchWeatherService(JSONObject jsonObjectWithWeather){
-        this.jsonObjectWithWeather=jsonObjectWithWeather;
+    public void setJsonObjectWithWeatherBasedOnFetchWeatherService(JSONObject jsonObjectWithWeather) {
+        this.jsonObjectWithWeather = jsonObjectWithWeather;
     }
 
     public void setWeatherDataBasedOnFetchService() {

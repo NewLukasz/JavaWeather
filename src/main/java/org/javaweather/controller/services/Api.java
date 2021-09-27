@@ -55,6 +55,6 @@ public class Api {
     }
 
     public void makeApiQuery() {
-        apiResponse=makeApiQueryAndSetApiResponse();
+        apiResponse = makeApiQueryAndSetApiResponse();
     }
 }

@@ -9,7 +9,7 @@ public class Persistence {
     String locationOfFileWithCitiesWithName;
 
     public Persistence(String fileName) {
-        locationOfFileWithCitiesWithName=CHOSEN_CITIES_LOCATION+fileName;
+        locationOfFileWithCitiesWithName = CHOSEN_CITIES_LOCATION + fileName;
     }
 
     public void saveToPersistence(String homeLocation, String vacationDestination) {

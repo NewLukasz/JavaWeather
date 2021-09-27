@@ -65,7 +65,7 @@ class FetchWeatherServiceTest {
     }
 
     @Test
-    void shouldSetJsonObjectCityIsFound(){
+    void shouldSetJsonObjectCityIsFound() {
         //given
         given(api.getApiResponse()).willReturn(getJsonObjectFromFile("FoundCityExampleResponseFromApi"));
         //when
@@ -76,7 +76,7 @@ class FetchWeatherServiceTest {
     }
 
     @Test
-    void shouldNotSetJsonObjectCityIsNotFound(){
+    void shouldNotSetJsonObjectCityIsNotFound() {
         //given
         given(api.getApiResponse()).willReturn(getJsonObjectFromFile("NotFoundCityExampleResponseFromApi"));
         //when

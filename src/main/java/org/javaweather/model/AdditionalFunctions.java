@@ -10,9 +10,9 @@ public class AdditionalFunctions {
     }
 
     public static String changeSpaceToPlus(String stringWithSpaces) {
-        if(stringWithSpaces!=null){
+        if (stringWithSpaces != null) {
             return stringWithSpaces.replace(" ", "+");
-        }else{
+        } else {
             return "";
         }
     }
@@ -21,7 +21,7 @@ public class AdditionalFunctions {
         return oneElementJsonArray.getJSONObject(0);
     }
 
-    public static String convertPlusToSpaceIfRequired(String city){
+    public static String convertPlusToSpaceIfRequired(String city) {
         if (city.contains("+")) {
             return changePlusToSpace(city);
         } else {

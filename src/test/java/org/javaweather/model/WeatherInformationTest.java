@@ -3,7 +3,6 @@ package org.javaweather.model;
 import org.javaweather.controller.services.FetchWeatherService;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -22,7 +21,7 @@ class WeatherInformationTest {
     private static WeatherInformation weatherInformation;
 
     @BeforeAll
-    static void setup(){
+    static void setup() {
         //given
         fetchWeatherService = mock(FetchWeatherService.class);
         weatherInformation = new WeatherInformation();
@@ -62,7 +61,7 @@ class WeatherInformationTest {
     }
 
     @Test
-    void shouldReturnWeatherIconCode(){
+    void shouldReturnWeatherIconCode() {
         //when
         JSONObject jsonObjectWithSingleDayData = weatherInformation.getOneDayFromForecast(2);
         //then
@@ -70,7 +69,7 @@ class WeatherInformationTest {
     }
 
     @Test
-    void shouldReturnWeatherDescription(){
+    void shouldReturnWeatherDescription() {
         //when
         JSONObject jsonObjectWithSingleDayData = weatherInformation.getOneDayFromForecast(2);
         //then
@@ -78,7 +77,7 @@ class WeatherInformationTest {
     }
 
     @Test
-    void shouldReturnTemperature(){
+    void shouldReturnTemperature() {
         //when
         JSONObject jsonObjectWithSingleDayData = weatherInformation.getOneDayFromForecast(2);
         //then
@@ -86,7 +85,7 @@ class WeatherInformationTest {
     }
 
     @Test
-    void shouldReturnFeelsLikeTemperature(){
+    void shouldReturnFeelsLikeTemperature() {
         //when
         JSONObject jsonObjectWithSingleDayData = weatherInformation.getOneDayFromForecast(2);
         //then
@@ -94,7 +93,7 @@ class WeatherInformationTest {
     }
 
     @Test
-    void shouldReturnPressure(){
+    void shouldReturnPressure() {
         //when
         JSONObject jsonObjectWithSingleDayData = weatherInformation.getOneDayFromForecast(2);
         //then
@@ -102,7 +101,7 @@ class WeatherInformationTest {
     }
 
     @Test
-    void shouldReturnCloudiness(){
+    void shouldReturnCloudiness() {
         //when
         JSONObject jsonObjectWithSingleDayData = weatherInformation.getOneDayFromForecast(2);
         //then
@@ -110,7 +109,7 @@ class WeatherInformationTest {
     }
 
     @Test
-    void shouldReturnWindSpeed(){
+    void shouldReturnWindSpeed() {
         //when
         JSONObject jsonObjectWithSingleDayData = weatherInformation.getOneDayFromForecast(2);
         //then
@@ -118,9 +117,9 @@ class WeatherInformationTest {
     }
 
     @Test
-    void shouldConvertTemperatureToStringAndAddCelsiusUnit(){
+    void shouldConvertTemperatureToStringAndAddCelsiusUnit() {
         //given
-        double temperature=30.5;
+        double temperature = 30.5;
         //when
         String temperatureString = weatherInformation.convertTemperatureToStringAndAddCelsiusUnit(temperature);
         //then
