@@ -3,16 +3,18 @@ package org.javaweather.controller;
 import java.io.*;
 
 public class Persistence {
-    private static final String CHOSEN_CITIES_LOCATION = System.getProperty("user.home") + File.separator + "choosenCitiesWeatherApplication.ser";
+    private static final String CHOSEN_CITIES_LOCATION = System.getProperty("user.home") + File.separator;
     private String homeCity;
     private String vacationDestination;
+    String locationOfFileWithCitiesWithName;
 
-    public Persistence() {
+    public Persistence(String fileName) {
+        locationOfFileWithCitiesWithName=CHOSEN_CITIES_LOCATION+fileName;
     }
 
     public void saveToPersistence(String homeLocation, String vacationDestination) {
         try {
-            File file = new File(CHOSEN_CITIES_LOCATION);
+            File file = new File(locationOfFileWithCitiesWithName);
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             String homeLocationModified = homeLocation.replace(" ", "+");
@@ -28,13 +30,13 @@ public class Persistence {
 
     public boolean checkPersistenceAndLoadIfIsInUse() {
         try {
-            FileInputStream fileInputStream = new FileInputStream(CHOSEN_CITIES_LOCATION);
+            FileInputStream fileInputStream = new FileInputStream(locationOfFileWithCitiesWithName);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             this.homeCity = (String) objectInputStream.readObject();
             this.vacationDestination = (String) objectInputStream.readObject();
+            objectInputStream.close();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }

@@ -37,7 +37,7 @@ public class FetchWeatherService {
         return MessageCode.fromCode(codeOfMessage);
     }
 
-    private boolean isCityFoundBaseApiResponse() {
+    public boolean isCityFoundBaseApiResponse() {
         if (getMessageFromJsonApiResponse() == MessageCode.CITY_FOUND) {
             return true;
         } else {
@@ -45,7 +45,7 @@ public class FetchWeatherService {
         }
     }
 
-    private void checkMessageFromApiAndAssignJsonObjectWithDataIfCityFound() {
+    public void checkMessageFromApiAndAssignJsonObjectWithDataIfCityFound() {
         if (isCityFoundBaseApiResponse()) {
             jsonWithWeatherData = apiResponse;
         }
