@@ -1,33 +1,28 @@
 package org.javaweather.controller.services;
 
+import org.javaweather.AdditionalFunctionsForTesting;
 import org.json.JSONObject;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.javaweather.AdditionalFunctionsForTesting.getJsonObjectFromFile;
 
 class FetchWeatherServiceTest {
 
-    private static FetchWeatherService fetchWeatherService;
-    private static Api api;
+    private FetchWeatherService fetchWeatherService;
 
-    @BeforeAll
-    static void setup() {
+    @BeforeEach
+    void setup() {
         fetchWeatherService = new FetchWeatherService();
-        api = mock(Api.class);
     }
 
     @Test
     void shouldFindCityInFoundCityApiResponse() {
         //given
-        given(api.getApiResponse()).willReturn(getJsonObjectFromFile("FoundCityExampleResponseFromApi"));
+        JSONObject jsonObjectWithResponseFromApi = getJsonObjectFromFile("FoundCityExampleResponseFromApi.json");
         //when
-        fetchWeatherService.setApiResponse(api.getApiResponse());
+        fetchWeatherService.setApiResponse(jsonObjectWithResponseFromApi);
         MessageCode messageCodeFromApiResponse = fetchWeatherService.getMessageFromJsonApiResponse();
         // then
         assertThat(messageCodeFromApiResponse, equalTo(MessageCode.CITY_FOUND));
@@ -36,9 +31,9 @@ class FetchWeatherServiceTest {
     @Test
     void shouldNotFindCityInNotFoundCityApiResponse() {
         //given
-        given(api.getApiResponse()).willReturn(getJsonObjectFromFile("NotFoundCityExampleResponseFromApi"));
+        JSONObject jsonObjectWithResponseFromApi = getJsonObjectFromFile("NotFoundCityExampleResponseFromApi.json");
         //when
-        fetchWeatherService.setApiResponse(api.getApiResponse());
+        fetchWeatherService.setApiResponse(jsonObjectWithResponseFromApi);
         MessageCode messageCodeFromApiResponse = fetchWeatherService.getMessageFromJsonApiResponse();
         // then
         assertThat(messageCodeFromApiResponse, equalTo(MessageCode.CITY_NOT_FOUND));
@@ -47,9 +42,9 @@ class FetchWeatherServiceTest {
     @Test
     void shouldReturnFalseApiResponseNotFindCity() {
         //given
-        given(api.getApiResponse()).willReturn(getJsonObjectFromFile("NotFoundCityExampleResponseFromApi"));
+        JSONObject jsonObjectWithResponseFromApi = getJsonObjectFromFile("NotFoundCityExampleResponseFromApi.json");;
         //when
-        fetchWeatherService.setApiResponse(api.getApiResponse());
+        fetchWeatherService.setApiResponse(jsonObjectWithResponseFromApi);
         //then
         assertThat(fetchWeatherService.isCityFoundBaseApiResponse(), equalTo(false));
     }
@@ -57,9 +52,9 @@ class FetchWeatherServiceTest {
     @Test
     void shouldReturnTrueApiResponseFindCity() {
         //given
-        given(api.getApiResponse()).willReturn(getJsonObjectFromFile("FoundCityExampleResponseFromApi"));
+        JSONObject jsonObjectWithResponseFromApi = getJsonObjectFromFile("FoundCityExampleResponseFromApi.json");
         //when
-        fetchWeatherService.setApiResponse(api.getApiResponse());
+        fetchWeatherService.setApiResponse(jsonObjectWithResponseFromApi);
         //then
         assertThat(fetchWeatherService.isCityFoundBaseApiResponse(), equalTo(true));
     }
@@ -67,33 +62,24 @@ class FetchWeatherServiceTest {
     @Test
     void shouldSetJsonObjectCityIsFound() {
         //given
-        given(api.getApiResponse()).willReturn(getJsonObjectFromFile("FoundCityExampleResponseFromApi"));
+        JSONObject jsonObjectWithResponseFromApi = getJsonObjectFromFile("FoundCityExampleResponseFromApi.json");
         //when
-        fetchWeatherService.setApiResponse(api.getApiResponse());
+        fetchWeatherService.setApiResponse(jsonObjectWithResponseFromApi);
         fetchWeatherService.checkMessageFromApiAndAssignJsonObjectWithDataIfCityFound();
+        String country = fetchWeatherService.getJsonWithWeatherData().getJSONObject("city").getString("country");
         //then
-        assertThat(fetchWeatherService.getJsonWithWeatherData(), is(notNullValue()));
+        assertThat(country, equalTo("PL"));
+
     }
 
     @Test
     void shouldNotSetJsonObjectCityIsNotFound() {
         //given
-        given(api.getApiResponse()).willReturn(getJsonObjectFromFile("NotFoundCityExampleResponseFromApi"));
+        JSONObject jsonObjectWithResponseFromApi = getJsonObjectFromFile("NotFoundCityExampleResponseFromApi.json");
         //when
-        fetchWeatherService.setApiResponse(api.getApiResponse());
+        fetchWeatherService.setApiResponse(jsonObjectWithResponseFromApi);
         fetchWeatherService.checkMessageFromApiAndAssignJsonObjectWithDataIfCityFound();
         //then
         assertThat(fetchWeatherService.getJsonWithWeatherData(), is(nullValue()));
     }
-
-    private JSONObject getJsonObjectFromFile(String fileName) {
-        try {
-            String inputStringFromResources = new String(getClass().getClassLoader().getResourceAsStream(fileName).readAllBytes());
-            return new JSONObject(inputStringFromResources);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new JSONObject();
-    }
-
 }

@@ -1,8 +1,7 @@
 package org.javaweather.model;
 
-import org.javaweather.controller.services.FetchWeatherService;
 import org.json.JSONObject;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -10,23 +9,19 @@ import java.io.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
+import static org.javaweather.AdditionalFunctionsForTesting.getJsonObjectFromFile;
 
 
 class WeatherInformationTest {
 
-
-    private static FetchWeatherService fetchWeatherService;
     private static WeatherInformation weatherInformation;
 
-    @BeforeAll
-    static void setup() {
+    @BeforeEach
+    void setup() {
         //given
-        fetchWeatherService = mock(FetchWeatherService.class);
         weatherInformation = new WeatherInformation();
-        given(fetchWeatherService.getJsonWithWeatherData()).willReturn(getJsonObjectFromFile("FoundCityExampleResponseFromApi"));
-        weatherInformation.setJsonObjectWithWeatherBasedOnFetchWeatherService(fetchWeatherService.getJsonWithWeatherData());
+        JSONObject jsonObjectWithWeatherDataFromFile = getJsonObjectFromFile("FoundCityExampleResponseFromApi.json");
+        weatherInformation.setJsonObjectWithWeatherBasedOnFetchWeatherService(jsonObjectWithWeatherDataFromFile);
         weatherInformation.setWeatherDataBasedOnFetchService();
     }
 
@@ -48,6 +43,7 @@ class WeatherInformationTest {
 
     @Test
     void shouldReturnCountry() {
+        //given is in beforeAll section
         //then
         assertThat(weatherInformation.getCountry(), equalTo("PL"));
     }
@@ -125,16 +121,6 @@ class WeatherInformationTest {
         //then
         assertThat(temperatureString.getClass(), is(String.class));
         assertThat(temperatureString, containsString("\u00B0C"));
-    }
-
-    private static JSONObject getJsonObjectFromFile(String fileName) {
-        try {
-            String inputStringFromResources = new String(WeatherInformationTest.class.getClassLoader().getResourceAsStream(fileName).readAllBytes());
-            return new JSONObject(inputStringFromResources);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new JSONObject();
     }
 
 }
